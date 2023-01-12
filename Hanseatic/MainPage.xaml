@@ -3,39 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hanseatic.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <ScrollView Orientation="Vertical">
+        <ScrollView Orientation="Horizontal">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <AbsoluteLayout>
+                <Image
+                    Source="map.png"
+                    HorizontalOptions="Center" />
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+                <RadioButton TextColor="White" TranslationX="48" TranslationY="393" Content="Edinburgh"/>
+                <RadioButton TextColor="White" TranslationX="111" TranslationY="565" Content="Newcastle"/>
+                <RadioButton TextColor="White" TranslationX="81" TranslationY="790" Content="London"/>
+                <RadioButton TextColor="White" TranslationX="203" TranslationY="879" Content="Antwerpen"/>
+                <RadioButton TextColor="White" TranslationX="335" TranslationY="938" Content="Brussels"/>
+                <RadioButton TextColor="White" TranslationX="337" TranslationY="759" Content="Amsterdam"/>
+                <RadioButton TextColor="White" TranslationX="418" TranslationY="787" Content="Bremen"/>
+                <RadioButton TextColor="White" TranslationX="466" TranslationY="760" Content="Hamburg"/>
+                <RadioButton TextColor="White" TranslationX="507" TranslationY="735" Content="Bremen"/>
+                <RadioButton TextColor="White" TranslationX="408" TranslationY="585" Content="Esbjerg"/>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            </AbsoluteLayout>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
+        </ScrollView>
+        
     </ScrollView>
 
 </ContentPage>

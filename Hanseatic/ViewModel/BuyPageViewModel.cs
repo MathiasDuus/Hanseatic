@@ -11,11 +11,13 @@ namespace Hanseatic.ViewModel;
 
 public partial class BuyPageViewModel : ObservableObject
 {
+    /*
     public productsViewModel()
     {
+        
         products = new ObservableCollection<object>
         {
-            new product
+            new products
             {
                 Name = "Beer",
                 Town = 62,
@@ -23,8 +25,10 @@ public partial class BuyPageViewModel : ObservableObject
                 Sell = 47,
                 Ship = 0
             }
-        };    
+        };   
+        
     }
+    */
 
     [ObservableProperty]
     ObservableCollection<Object> products;

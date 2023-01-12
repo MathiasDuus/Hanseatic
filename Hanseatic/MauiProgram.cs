@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Hanseatic.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace Hanseatic;
 
@@ -14,6 +15,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+		builder.Services.AddSingleton<MainPage>();
+		builder.Services.AddSingleton<MainPageViewModel>();
+
+		builder.Services.AddSingleton<MapPage>();
+		builder.Services.AddSingleton<MapPageViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

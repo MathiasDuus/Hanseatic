@@ -2,11 +2,168 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hanseatic.BuyPage"
-             Title="BuyPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="City Name"
+             >
+
+
+    <Grid  Padding="5,0 "
+          BackgroundColor="White"
+          ColumnSpacing="1"
+          RowSpacing="1"
+          ColumnDefinitions ="*, *, *, *, *"
+          RowDefinitions="2*, *, 14*, *">
+
+        
+        <!-- ROW 0: Title -->
+        <Label
+        x:Name="result"
+        Grid.ColumnSpan="5"
+        FontAttributes="Bold"
+        FontSize="26"
+        HorizontalTextAlignment="Center"
+        VerticalTextAlignment="Center"
+        Text="Trading Goods"
+        TextColor="Black"/>
+
+        <!-- ROW 1: Titles -->
+        <Label
+        HorizontalTextAlignment="Center"
+        VerticalTextAlignment="Center"
+        Grid.Row="1"
+        Grid.Column="0"
+        FontAttributes="Bold"
+        FontSize="14"
+        Text="Goods"
+        TextColor="Black"/>
+
+        <Label
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="1"
+            FontAttributes="Bold"
+            FontSize="14"
+            Text="Town"
+            TextColor="Black"/>
+
+        <Label
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="2"
+            FontAttributes="Bold"
+            FontSize="14"
+            Text="Buy"
+            TextColor="Black"/>
+
+        <Label
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="3"
+            FontAttributes="Bold"
+            FontSize="14"
+            Text="Sell"
+            TextColor="Black"/>
+
+        <Label
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="4"
+            FontAttributes="Bold"
+            FontSize="14"
+            Text="Ship"
+            TextColor="Black"/>
+
+        <!-- ROW 2: Products -->
+        <ScrollView>
+            <ListView ItemsSource="{Binding Products}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1"
+                                   Text="{Binding Name}" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"/>
+                                <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding Amount}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"/>
+                                <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding Buy}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"/>
+                                <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding Sell}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"/>
+                                <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding Ship}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+
+        <!-- ROW 3: Buy Amount & Gold -->
+        <Grid 
+            Grid.Row="5"
+            Grid.ColumnSpan="5"
+              ColumnDefinitions ="*, *, *, *, *, *"
+              RowDefinitions="*">
+            <Label Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Gold"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"/>
+
+            <Button Grid.Row="1"
+                    Grid.Column="1"
+                    Text="x1"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"/>
+
+            <Button Grid.Row="1"
+                    Grid.Column="2"
+                    Text="x5"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"/>
+
+            <Button Grid.Row="1"
+                    Grid.Column="3"
+                    Text="x50"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"/>
+
+            <Button Grid.Row="1"
+                    Grid.Column="4"
+                    Text="max"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"/>
+
+            <Button Grid.Row="1"
+                    Grid.Column="5"
+                    Text="X"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"/>
+        </Grid>
+    </Grid>
+    
 </ContentPage>

@@ -6,8 +6,16 @@
     xmlns:local="clr-namespace:Hanseatic"
     Shell.FlyoutBehavior="Disabled">
 
+
+    <!-- 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    -->
+    
+    <ShellContent
+        ContentTemplate="{DataTemplate local:BuyPage}"
+        Route="BuyPage" />
+    
 
 </Shell>

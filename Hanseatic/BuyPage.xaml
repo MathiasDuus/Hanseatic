@@ -8,12 +8,13 @@
              >
 
 
-    <Grid  Padding="5,0 "
-          BackgroundColor="White"
-          ColumnSpacing="1"
-          RowSpacing="1"
-          ColumnDefinitions ="*, *, *, *, *"
-          RowDefinitions="2*, *, 14*, *">
+    <Grid  
+        Padding="5,0 "
+        BackgroundColor="White"
+        ColumnSpacing="1"
+        RowSpacing="1"
+        ColumnDefinitions ="*, *, *, *, *"
+        RowDefinitions="2*, *, 14*, *">
 
         
         <!-- ROW 0: Title -->
@@ -80,43 +81,51 @@
             TextColor="Black"/>
 
         <!-- ROW 2: Products -->
-        <ScrollView Grid.Row="2"
-                  Grid.ColumnSpan="5">
+        <ScrollView 
+            Grid.Row="2"
+            Grid.ColumnSpan="5">
+            
             <CollectionView ItemsSource="{Binding ProductsCollection}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodel:Products">
-                        <Grid Grid.Row="2"
-                              Grid.ColumnSpan="5"
-                              Padding="10"
-                              RowDefinitions="*"
-                              ColumnDefinitions="*, *, *, *, *">
-                            <Label Grid.Row="0"
-                                    Padding="0,0,10,0"
-                                    Grid.Column="0"
-                                   Text="{Binding Name}"
-                                   LineBreakMode="NoWrap"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="End"/>
-                            <Label Grid.Row="0"
-                                    Grid.Column="1"
-                                    Text="{Binding Town}"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
-                            <Button Grid.Row="0"
-                                    Grid.Column="2"
-                                    Text="{Binding Buy}"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
-                            <Button Grid.Row="0"
-                                    Grid.Column="3"
-                                    Text="{Binding Sell}"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
-                            <Label Grid.Row="0"
-                                    Grid.Column="4"
-                                    Text="{Binding Ship}"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
+                        <Grid 
+                            Grid.Row="2"
+                            Grid.ColumnSpan="5"
+                            Padding="10"
+                            RowDefinitions="*"
+                            ColumnDefinitions="*, *, *, *, *">
+                            <Label 
+                                Grid.Row="0"
+                                Padding="0,0,10,0"
+                                Grid.Column="0"
+                                Text="{Binding Name}"
+                                LineBreakMode="NoWrap"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End"/>
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding Town}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"/>
+                            <Button 
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Text="{Binding Buy}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"/>
+                            <Button 
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                Text="{Binding Sell}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"/>
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="4"
+                                Text="{Binding Ship}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"/>
 
                         </Grid>
                     </DataTemplate>
@@ -128,44 +137,46 @@
         <Grid 
             Grid.Row="3"
             Grid.ColumnSpan="5"
-              ColumnDefinitions ="*, *, *, *, *, *"
-              RowDefinitions="*">
-            <Label Grid.Row="1"
-                    Grid.Column="0"
-                    Text="560"
-                    TextColor="Black"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"/>
+            ColumnDefinitions ="*, *, *, *, *, *"
+            RowDefinitions="*">
+            
+            <Label 
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Coins: 560"
+                TextColor="Black"
+                VerticalOptions="Center"
+                HorizontalOptions="End"/>
 
-            <Button Grid.Row="1"
-                    Grid.Column="1"
-                    Text="x1"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"/>
+            <RadioButton 
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="x1"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                IsChecked="True"/>
 
-            <Button Grid.Row="1"
-                    Grid.Column="2"
-                    Text="x5"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"/>
+            <RadioButton 
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="x5"
+                VerticalOptions="Center"
+                HorizontalOptions="End"/>
 
-            <Button Grid.Row="1"
-                    Grid.Column="3"
-                    Text="x50"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"/>
+            <RadioButton 
+                Grid.Row="1"
+                Grid.Column="3"
+                Content="x50"
+                VerticalOptions="Center"
+                HorizontalOptions="End"/>
 
-            <Button Grid.Row="1"
-                    Grid.Column="4"
-                    Text="max"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"/>
+            <RadioButton 
+                Grid.Row="1"
+                Grid.Column="4"
+                Content="max"
+                VerticalOptions="Center"
+                HorizontalOptions="End"/>
 
-            <Button Grid.Row="1"
-                    Grid.Column="5"
-                    Text="X"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"/>
         </Grid>
     </Grid>
     

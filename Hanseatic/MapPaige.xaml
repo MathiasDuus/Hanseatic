@@ -15,7 +15,7 @@
                 
                 <!-- Coin and date -->
                 <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
-                <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="13001 Jan."/>
+                <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="1301 Jan."/>
 
                 <!-- All the cities -->
                 <RadioButton TextColor="White" TranslationX="47" TranslationY="394" Content="Edinburgh" CheckedChanged="RadioButton_EnterCity"/>

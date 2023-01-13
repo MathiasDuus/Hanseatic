@@ -22,6 +22,9 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MapPage>();
 		builder.Services.AddSingleton<MapPageViewModel>();
 
+		builder.Services.AddTransient<BuyPage>();
+		builder.Services.AddTransient<BuyPageViewModel>();
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

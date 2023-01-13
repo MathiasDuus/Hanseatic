@@ -1,16 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hanseatic.ViewModel;
 
 public partial class BuyPageViewModel : ObservableObject
 {
-    
+
     public BuyPageViewModel()
     {
 
@@ -112,8 +107,8 @@ public partial class BuyPageViewModel : ObservableObject
                 Sell = 57,
                 Ship = 0
             }
-        };   
-        
+        };
+
     }
 
     [ObservableProperty]

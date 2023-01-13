@@ -7,6 +7,6 @@ public partial class BuyPage : ContentPage
 	public BuyPage(BuyPageViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = vm;
-    }
+		BindingContext = vm;
+	}
 }

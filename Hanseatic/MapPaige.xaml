@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hanseatic.MapPage">
+
+    <ScrollView Orientation="Vertical">
+        <ScrollView Orientation="Horizontal">
+
+            <AbsoluteLayout>
+                <Image
+                    Source="map.png"
+                    HorizontalOptions="Center" />
+                
+                <!-- Coin and date -->
+                <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
+                <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="13001 Jan."/>
+
+                <!-- All the cities -->
+                <RadioButton TextColor="White" TranslationX="47" TranslationY="394" Content="Edinburgh"/>
+                <RadioButton TextColor="White" TranslationX="111" TranslationY="566" Content="Newcastle"/>
+                <RadioButton TextColor="White" TranslationX="81" TranslationY="790" Content="London"/>
+                <RadioButton TextColor="White" TranslationX="203" TranslationY="879" Content="Antwerpen"/>
+                <RadioButton TextColor="White" TranslationX="335" TranslationY="939" Content="Brussels"/>
+                <RadioButton TextColor="White" TranslationX="337" TranslationY="760" Content="Amsterdam"/>
+                <RadioButton TextColor="White" TranslationX="418" TranslationY="787" Content="Bremen"/>
+                <RadioButton TextColor="White" TranslationX="466" TranslationY="760" Content="Hamburg"/>
+                <RadioButton TextColor="White" TranslationX="507" TranslationY="735" Content="Lûbeck"/>
+                <RadioButton TextColor="White" TranslationX="408" TranslationY="586" Content="Esbjerg"/>
+                <RadioButton TextColor="White" TranslationX="469" TranslationY="442" Content="Frederikshavn"/>
+                <RadioButton TextColor="White" TranslationX="361" TranslationY="52" Content="Bergen"/>
+                <RadioButton TextColor="White" TranslationX="526" TranslationY="195" Content="Oslo"/>
+                <RadioButton TextColor="White" TranslationX="615" TranslationY="570" Content="Malmø"/>
+                <RadioButton TextColor="White" TranslationX="557" TranslationY="722" Content="Rostock"/>
+                <RadioButton TextColor="White" TranslationX="649" TranslationY="761" Content="Stettin"/>
+                <RadioButton TextColor="White" TranslationX="804" TranslationY="698" Content="Gdańsk"/>
+                <RadioButton TextColor="White" TranslationX="808" TranslationY="799" Content="Bydgoszcz"/>
+                <RadioButton TextColor="White" TranslationX="792" TranslationY="377" Content="Visby"/>
+                <RadioButton TextColor="White" TranslationX="803" TranslationY="237" Content="Stockholm"/>
+                <RadioButton TextColor="White" TranslationX="985" TranslationY="440" Content="Riga"/>
+                <RadioButton TextColor="White" TranslationX="967" TranslationY="237" Content="Tallinn"/>
+                <RadioButton TextColor="White" TranslationX="1151" TranslationY="114" Content="Sankt Petersborg"/>
+                <RadioButton TextColor="White" TranslationX="1207" TranslationY="235" Content="Velikij Novgorod"/>
+
+            </AbsoluteLayout>
+
+        </ScrollView>
+        
+    </ScrollView>
+
+</ContentPage>

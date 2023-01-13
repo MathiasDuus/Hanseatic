@@ -2,9 +2,9 @@
 
 namespace Hanseatic;
 
-public partial class MainPage : ContentPage
+public partial class MapPage : ContentPage
 {
-	public MainPage(MainPageViewModel vm)
+	public MapPage(MapPageViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

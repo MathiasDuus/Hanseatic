@@ -58,7 +58,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="MapPaige.xaml.cs">
+	    <DependentUpon>MapPaige.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="BuyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MapPaige.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

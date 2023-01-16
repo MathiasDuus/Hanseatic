@@ -109,12 +109,14 @@
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Button 
+                                Style="{StaticResource Buy}"
                                 Grid.Row="0"
                                 Grid.Column="2"
                                 Text="{Binding Buy}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Button 
+                                Style="{StaticResource Sell}"
                                 Grid.Row="0"
                                 Grid.Column="3"
                                 Text="{Binding Sell}"
@@ -139,43 +141,50 @@
             Grid.ColumnSpan="5"
             ColumnDefinitions ="*, *, *, *, *, *"
             RowDefinitions="*">
-            
+
             <Label 
                 Grid.Row="1"
                 Grid.Column="0"
-                Text="Coins: 560"
-                TextColor="Black"
+                Text="Coins:"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"/>
+
+            <Label 
+                Style="{StaticResource coins}"
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="560"
                 VerticalOptions="Center"
                 HorizontalOptions="End"/>
 
             <RadioButton 
                 Grid.Row="1"
                 Grid.Column="1"
-                Content="x1"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
-                IsChecked="True"/>
+                IsChecked="True"
+                Content="x1"/>
 
             <RadioButton 
                 Grid.Row="1"
                 Grid.Column="2"
-                Content="x5"
                 VerticalOptions="Center"
-                HorizontalOptions="End"/>
+                HorizontalOptions="End"
+                Content="x5"/>
 
             <RadioButton 
                 Grid.Row="1"
                 Grid.Column="3"
-                Content="x50"
                 VerticalOptions="Center"
-                HorizontalOptions="End"/>
+                HorizontalOptions="End"
+                Content="x50"/>
 
             <RadioButton 
                 Grid.Row="1"
                 Grid.Column="4"
-                Content="max"
                 VerticalOptions="Center"
-                HorizontalOptions="End"/>
+                HorizontalOptions="End"
+                Content="max"/>
 
         </Grid>
     </Grid>

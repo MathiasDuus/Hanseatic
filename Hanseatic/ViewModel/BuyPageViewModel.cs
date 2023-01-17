@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Collections.ObjectModel;
-
-namespace Hanseatic.ViewModel;
+﻿namespace Hanseatic.ViewModel;
 
 public partial class BuyPageViewModel : ObservableObject
 {
@@ -113,13 +110,4 @@ public partial class BuyPageViewModel : ObservableObject
 
     [ObservableProperty]
     ObservableCollection<Products> productsCollection;
-}
-
-public class Products
-{
-    public string Name { get; set; }
-    public int Town { get; set; }
-    public int Buy { get; set; }
-    public int Sell { get; set; }
-    public int Ship { get; set; }
 }

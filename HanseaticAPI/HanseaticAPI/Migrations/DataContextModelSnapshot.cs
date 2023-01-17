@@ -21,7 +21,7 @@ namespace HanseaticAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HanseaticAPI.CityProduct", b =>
+            modelBuilder.Entity("HanseaticAPI.Models.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,33 +29,63 @@ namespace HanseaticAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("actual_amount")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("HanseaticAPI.Models.CityProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("buy_price")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActualAmount")
                         .HasColumnType("int");
 
-                    b.Property<int>("city_id")
+                    b.Property<int>("BasePrice")
                         .HasColumnType("int");
 
-                    b.Property<int>("desired_amount")
+                    b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<double>("max_fluctation")
+                    b.Property<int>("DesiredAmount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("MaxAmountFluctation")
                         .HasColumnType("float");
 
-                    b.Property<double>("min_fluctation")
+                    b.Property<double>("MinAmountFluctation")
                         .HasColumnType("float");
 
-                    b.Property<int>("product_type")
+                    b.Property<int>("Product")
                         .HasColumnType("int");
 
-                    b.Property<int>("sell_price")
+                    b.Property<int>("Save")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("CityProducts");
+                });
+
+            modelBuilder.Entity("HanseaticAPI.Models.CityProduct", b =>
+                {
+                    b.HasOne("HanseaticAPI.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
                 });
 #pragma warning restore 612, 618
         }

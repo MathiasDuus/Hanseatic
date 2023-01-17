@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HanseaticAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HanseaticAPI.Controllers
 {
@@ -6,84 +7,65 @@ namespace HanseaticAPI.Controllers
     [ApiController]
     public class CityProductController : ControllerBase
     {
-        private static List<CityProduct> city_products = new List<CityProduct>
-            {
-                new CityProduct
-                {
-                    Id = 1,
-                    city_id= 1,
-                    product_type = 1,
-                    desired_amount = 22,
-                    actual_amount = 23,
-                    sell_price = 23,
-                    buy_price = 33,
-                    min_fluctation = 0.95,
-                    max_fluctation = 1.54
-                },
-                new CityProduct
-                {
-                    Id = 2,
-                    city_id= 1,
-                    product_type = 2,
-                    desired_amount = 1,
-                    actual_amount = 1,
-                    sell_price = 1,
-                    buy_price = 33,
-                    min_fluctation = 0.95,
-                    max_fluctation = 1.54
-                }
-            };
+        private readonly DataContext _context;
+
+        public CityProductController(DataContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
         public async Task<ActionResult<List<CityProduct>>> Get()
         {
-            return Ok(city_products);
+            return Ok(await _context.CityProducts.ToListAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<List<CityProduct>>> Get(int id)
         {
-            var product = city_products.Find(p => p.Id == id);
+            var product = await _context.CityProducts.FindAsync(id);
             if (product == null)
-                return BadRequest("Hero not found.");
+                return BadRequest("Product not found.");
             return Ok(product);
         }
 
         [HttpPost]
         public async Task<ActionResult<List<CityProduct>>> AddCityProduct(CityProduct product)
         {
-            city_products.Add(product);
-            return Ok(city_products);
+            _context.CityProducts.Add(product);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.CityProducts.ToListAsync());
         }
 
         [HttpPut]
         public async Task<ActionResult<List<CityProduct>>> UpdateCityProduct(CityProduct request)
         {
-            var product = city_products.Find(p => p.Id == request.Id);
+            var product = await _context.CityProducts.FindAsync(request.Id);
             if (product == null)
-                return BadRequest("Hero not found.");
+                return BadRequest("Product not found.");
 
-            product.Id = request.Id;
-            product.city_id = request.city_id;
-            product.product_type = request.product_type;
-            product.desired_amount = request.desired_amount;
-            product.actual_amount = request.actual_amount;
-            product.sell_price = request.sell_price;
-            product.buy_price = request.buy_price;
-            product.max_fluctation = request.max_fluctation;
-            product.min_fluctation = request.min_fluctation;
+            product.City = request.City;
+            product.Product = request.Product;
+            product.DesiredAmount = request.DesiredAmount;
+            product.ActualAmount = request.ActualAmount;
+            product.BasePrice = request.BasePrice;
+            product.MaxAmountFluctation = request.MaxAmountFluctation;
+            product.MinAmountFluctation = request.MinAmountFluctation;
+            product.Save = request.Save;
 
-            return Ok(city_products);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.CityProducts.ToListAsync());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<CityProduct>>> Delete(int id)
         {
-            var product = city_products.Find(p => p.Id == id);
+            var product = await _context.CityProducts.FindAsync(id);
             if (product == null)
-                return BadRequest("Hero not found.");
-            city_products.Remove(product);
-            return Ok(product);
+                return BadRequest("Product not found.");
+            _context.CityProducts.Remove(product);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.CityProducts.ToListAsync());
         }
     }
 }

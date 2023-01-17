@@ -1,13 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace HanseaticAPI.Models
+﻿namespace HanseaticAPI.Models
 {
-    public class CityProduct
+    public class CityProductDTO
     {
-        public int Id { get; set; }
-
-        [JsonIgnore]
-        public City City { get; set; } = null!;
         public int CityId { get; set; }
         public int Product { get; set; }
         public int DesiredAmount { get; set; }

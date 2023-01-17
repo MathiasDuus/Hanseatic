@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Hanseatic.Data;
 using System.Collections.ObjectModel;
 
@@ -29,4 +29,5 @@ public partial class BuyPageViewModel : ObservableObject
             ProductsCollection.Add(product);
         }
     }
+
 }

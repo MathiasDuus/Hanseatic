@@ -8,10 +8,12 @@ namespace HanseaticAPI.Controllers
     public class CityProductController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public CityProductController(DataContext context)
+        public CityProductController(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,8 +32,9 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<CityProduct>>> AddCityProduct(CityProduct product)
+        public async Task<ActionResult<List<CityProduct>>> AddCityProduct(CityProductDTO productDTO)
         {
+            var product = _mapper.Map<CityProduct>(productDTO);
             _context.CityProducts.Add(product);
             await _context.SaveChangesAsync();
             return Ok(await _context.CityProducts.ToListAsync());
@@ -44,7 +47,7 @@ namespace HanseaticAPI.Controllers
             if (product == null)
                 return BadRequest("Product not found.");
 
-            product.City = request.City;
+            product.CityId = request.CityId;
             product.Product = request.Product;
             product.DesiredAmount = request.DesiredAmount;
             product.ActualAmount = request.ActualAmount;

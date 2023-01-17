@@ -4,9 +4,9 @@ namespace Hanseatic;
 
 public partial class BuyPage : ContentPage
 {
-	public BuyPage(BuyPageViewModel vm)
-	{
-		InitializeComponent();
-		BindingContext = vm;
-	}
+    public BuyPage(BuyPageViewModel vm)
+    {
+        InitializeComponent();
+        BindingContext = vm;
+    }
 }

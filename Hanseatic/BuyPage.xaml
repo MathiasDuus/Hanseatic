@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hanseatic.BuyPage"
+             xmlns:data="clr-namespace:Hanseatic.Data"
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
              x:DataType="viewmodel:BuyPageViewModel"
-             Title="City Name"
-             >
+             Title="{Binding CityName}">
 
 
     <Grid  
@@ -87,7 +87,7 @@
             
             <CollectionView ItemsSource="{Binding ProductsCollection}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="viewmodel:Products">
+                    <DataTemplate x:DataType="data:CityProduct">
                         <Grid 
                             Grid.Row="2"
                             Grid.ColumnSpan="5"
@@ -98,34 +98,34 @@
                                 Grid.Row="0"
                                 Padding="0,0,10,0"
                                 Grid.Column="0"
-                                Text="{Binding Name}"
+                                Text="{Binding Product}"
                                 LineBreakMode="NoWrap"
                                 VerticalOptions="Center"
                                 HorizontalOptions="End"/>
                             <Label 
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                Text="{Binding Town}"
+                                Text="{Binding City}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Button 
                                 Style="{StaticResource Buy}"
                                 Grid.Row="0"
                                 Grid.Column="2"
-                                Text="{Binding Buy}"
+                                Text="{Binding BasePrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Button 
                                 Style="{StaticResource Sell}"
                                 Grid.Row="0"
                                 Grid.Column="3"
-                                Text="{Binding Sell}"
+                                Text="{Binding BasePrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Label 
                                 Grid.Row="0"
                                 Grid.Column="4"
-                                Text="{Binding Ship}"
+                                Text="{Binding Save}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
 

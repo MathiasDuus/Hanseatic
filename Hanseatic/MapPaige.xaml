@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hanseatic.MapPage"
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
-             x:DataType="viewmodel:MapPageViewModel">
+             x:DataType="viewmodel:MapPageViewModel"
+             Title="Map">
 
     <ScrollView Orientation="Vertical">
         <ScrollView Orientation="Horizontal">
@@ -12,7 +13,7 @@
                 <Image
                     Source="map.png"
                     HorizontalOptions="Center" />
-                
+
                 <!-- Coin and date -->
                 <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
                 <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="1301 Jan."/>

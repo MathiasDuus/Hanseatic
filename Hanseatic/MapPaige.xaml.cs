@@ -16,6 +16,10 @@ public partial class MapPage : ContentPage
 		{
 			if (e.Value)
 			{
+				// Increase the date
+
+
+				// Go To buypage
 				await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={radioButton.Content}");
 			}
 		}

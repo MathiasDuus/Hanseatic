@@ -2,6 +2,7 @@
 {
     public class CityProductDTO
     {
+        public int Id { get; set; }
         public int CityId { get; set; }
         public int Product { get; set; }
         public int DesiredAmount { get; set; }

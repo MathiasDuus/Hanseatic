@@ -8,10 +8,12 @@ namespace HanseaticAPI.Controllers
     public class ProductTypeController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductTypeController(DataContext context)
+        public ProductTypeController(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,8 +32,9 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<ProductType>>> AddCityProduct(ProductType type)
+        public async Task<ActionResult<List<ProductType>>> AddCityProduct(ProductTypeDTO typeDTO)
         {
+            var type = _mapper.Map<ProductType>(typeDTO);
             _context.ProductTypes.Add(type);
             await _context.SaveChangesAsync();
             return Ok(await _context.ProductTypes.ToListAsync());

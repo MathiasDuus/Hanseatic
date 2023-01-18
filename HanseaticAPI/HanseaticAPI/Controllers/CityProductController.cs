@@ -41,20 +41,20 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<List<CityProduct>>> UpdateCityProduct(CityProductDTO requestDTO)
+        public async Task<ActionResult<List<CityProduct>>> UpdateCityProduct(CityProduct request)
         {
-            var product = await _context.CityProducts.FindAsync(requestDTO.Id);
+            var product = await _context.CityProducts.FindAsync(request.Id);
             if (product == null)
                 return BadRequest("Product not found.");
 
-            product.CityId = requestDTO.CityId;
-            product.ProductId = requestDTO.ProductId;
-            product.DesiredAmount = requestDTO.DesiredAmount;
-            product.ActualAmount = requestDTO.ActualAmount;
-            product.BasePrice = requestDTO.BasePrice;
-            product.MaxAmountFluctation = requestDTO.MaxAmountFluctation;
-            product.MinAmountFluctation = requestDTO.MinAmountFluctation;
-            product.Save = requestDTO.Save;
+            product.CityId = request.CityId;
+            product.ProductId = request.ProductId;
+            product.DesiredAmount = request.DesiredAmount;
+            product.ActualAmount = request.ActualAmount;
+            product.BasePrice = request.BasePrice;
+            product.MaxAmountFluctation = request.MaxAmountFluctation;
+            product.MinAmountFluctation = request.MinAmountFluctation;
+            product.Save = request.Save;
 
             await _context.SaveChangesAsync();
             return Ok(await _context.CityProducts.ToListAsync());

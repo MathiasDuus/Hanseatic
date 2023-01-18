@@ -7,10 +7,10 @@ namespace HanseaticAPI.Models
         public int Id { get; set; }
 
         [JsonIgnore]
-        public City City { get; set; } = null!;
+        public City? City { get; set; } = null!;
         public int CityId { get; set; }
         [JsonIgnore]
-        public ProductType Product { get; set; } = null!;
+        public ProductType? Product { get; set; } = null!;
         public int ProductId { get; set; }
         public int DesiredAmount { get; set; }
         public int ActualAmount { get; set; }

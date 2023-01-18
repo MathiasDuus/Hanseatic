@@ -171,13 +171,17 @@ namespace HanseaticAPI.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Product")
+                    b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Ship")
+                    b.Property<int>("ShipId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductTypeId");
+
+                    b.HasIndex("ShipId");
 
                     b.ToTable("ShipProducts");
                 });
@@ -199,6 +203,25 @@ namespace HanseaticAPI.Migrations
                     b.Navigation("City");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("HanseaticAPI.Models.ShipProduct", b =>
+                {
+                    b.HasOne("HanseaticAPI.Models.ProductType", "ProductType")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HanseaticAPI.Models.Ship", "Ship")
+                        .WithMany()
+                        .HasForeignKey("ShipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductType");
+
+                    b.Navigation("Ship");
                 });
 #pragma warning restore 612, 618
         }

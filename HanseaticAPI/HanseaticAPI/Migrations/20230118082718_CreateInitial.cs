@@ -66,21 +66,6 @@ namespace HanseaticAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShipProducts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ship = table.Column<int>(type: "int", nullable: false),
-                    Product = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShipProducts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ships",
                 columns: table => new
                 {
@@ -127,6 +112,33 @@ namespace HanseaticAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ShipProducts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShipId = table.Column<int>(type: "int", nullable: false),
+                    ProductTypeId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShipProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShipProducts_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
+                        principalTable: "ProductTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShipProducts_Ships_ShipId",
+                        column: x => x.ShipId,
+                        principalTable: "Ships",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CityProducts_CityId",
                 table: "CityProducts",
@@ -136,6 +148,16 @@ namespace HanseaticAPI.Migrations
                 name: "IX_CityProducts_ProductId",
                 table: "CityProducts",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShipProducts_ProductTypeId",
+                table: "ShipProducts",
+                column: "ProductTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShipProducts_ShipId",
+                table: "ShipProducts",
+                column: "ShipId");
         }
 
         /// <inheritdoc />
@@ -154,13 +176,13 @@ namespace HanseaticAPI.Migrations
                 name: "ShipProducts");
 
             migrationBuilder.DropTable(
-                name: "Ships");
-
-            migrationBuilder.DropTable(
                 name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "ProductTypes");
+
+            migrationBuilder.DropTable(
+                name: "Ships");
         }
     }
 }

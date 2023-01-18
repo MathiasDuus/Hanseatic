@@ -105,7 +105,7 @@
                             <Label 
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                Text="{Binding City}"
+                                Text="{Binding CityId}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Button 
@@ -156,35 +156,6 @@
                 Text="560"
                 VerticalOptions="Center"
                 HorizontalOptions="End"/>
-
-            <RadioButton 
-                Grid.Row="1"
-                Grid.Column="1"
-                VerticalOptions="Center"
-                HorizontalOptions="End"
-                IsChecked="True"
-                Content="x1"/>
-
-            <RadioButton 
-                Grid.Row="1"
-                Grid.Column="2"
-                VerticalOptions="Center"
-                HorizontalOptions="End"
-                Content="x5"/>
-
-            <RadioButton 
-                Grid.Row="1"
-                Grid.Column="3"
-                VerticalOptions="Center"
-                HorizontalOptions="End"
-                Content="x50"/>
-
-            <RadioButton 
-                Grid.Row="1"
-                Grid.Column="4"
-                VerticalOptions="Center"
-                HorizontalOptions="End"
-                Content="max"/>
 
         </Grid>
     </Grid>

@@ -4,25 +4,25 @@ namespace Hanseatic;
 
 public partial class MapPage : ContentPage
 {
-	public MapPage(MapPageViewModel vm)
-	{
-		InitializeComponent();
-		BindingContext = vm;
-	}
+    public MapPage(MapPageViewModel vm)
+    {
+        InitializeComponent();
+        BindingContext = vm;
+    }
 
-	private async void RadioButton_EnterCity(object sender, CheckedChangedEventArgs e)
-	{
-		if (sender is RadioButton radioButton)
-		{
-			if (e.Value)
-			{
-				// Increase the date
+    private async void RadioButton_EnterCity(object sender, CheckedChangedEventArgs e)
+    {
+        if (sender is RadioButton radioButton)
+        {
+            if (e.Value)
+            {
+                // Increase the date
 
 
-				// Go To buypage
-				await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={radioButton.Content}");
-			}
-		}
-	}
+                // Go To buypage
+                await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={radioButton.Content}");
+            }
+        }
+    }
 }
 

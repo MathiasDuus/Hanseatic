@@ -2,8 +2,8 @@
 using Android.Runtime;
 
 namespace Hanseatic;
+[Application(UsesCleartextTraffic = true)]
 
-[Application]
 public class MainApplication : MauiApplication
 {
     public MainApplication(IntPtr handle, JniHandleOwnership ownership)

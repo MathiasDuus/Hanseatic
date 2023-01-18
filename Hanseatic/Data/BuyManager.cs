@@ -7,7 +7,7 @@ namespace Hanseatic.Data
     class BuyManager
     {
         // TODO: Add fields for BaseAddress, Url, and authorizationKey
-        static readonly string BaseAddress = "https://localhost:5001";
+        static readonly string BaseAddress = "http://10.130.54.29:5000";
         static readonly string Url = $"{BaseAddress}/api";
 
         static HttpClient client;
@@ -33,7 +33,29 @@ namespace Hanseatic.Data
 
             HttpClient client = await GetClient();
 
+            //List<CityProduct> monkeyList = new List<CityProduct> { };
+
+            //HttpResponseMessage response = null;
+            //try
+            //{
+            //    response = client.GetAsync($"{Url}/city_product").Result;
+            //}
+            //catch (Exception e)
+            //{
+
+            //    System.Diagnostics.Debug.WriteLine(e.Message);
+            //}
+
+            //if (response != null && response.IsSuccessStatusCode)
+            //{
+            //    monkeyList = await response.Content.ReadFromJsonAsync<List<CityProduct>>();
+            //}
+
             return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product");
+
+            //HttpClient client = await GetClient();
+
+            //return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product");
         }
 
         public static async Task<CityProduct> Add(string cityProductName, string supplier, string cityProductType)

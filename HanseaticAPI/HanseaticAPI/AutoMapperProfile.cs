@@ -21,6 +21,12 @@ namespace HanseaticAPI
 
             CreateMap<ShipProduct, ShipProductDTO>();
             CreateMap<ShipProductDTO, ShipProduct>();
+
+            CreateMap<Account, AccountDTO>();
+            CreateMap<AccountDTO, Account>();
+
+            CreateMap<Save, SaveDTO>();
+            CreateMap<SaveDTO, Save>();
         }
 
     }

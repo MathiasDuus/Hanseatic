@@ -102,7 +102,7 @@ namespace HanseaticAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CityId = table.Column<int>(type: "int", nullable: false),
-                    Product = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     DesiredAmount = table.Column<int>(type: "int", nullable: false),
                     ActualAmount = table.Column<int>(type: "int", nullable: false),
                     BasePrice = table.Column<int>(type: "int", nullable: false),
@@ -119,12 +119,23 @@ namespace HanseaticAPI.Migrations
                         principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CityProducts_ProductTypes_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "ProductTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CityProducts_CityId",
                 table: "CityProducts",
                 column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CityProducts_ProductId",
+                table: "CityProducts",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
@@ -137,9 +148,6 @@ namespace HanseaticAPI.Migrations
                 name: "CityProducts");
 
             migrationBuilder.DropTable(
-                name: "ProductTypes");
-
-            migrationBuilder.DropTable(
                 name: "Saves");
 
             migrationBuilder.DropTable(
@@ -150,6 +158,9 @@ namespace HanseaticAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "ProductTypes");
         }
     }
 }

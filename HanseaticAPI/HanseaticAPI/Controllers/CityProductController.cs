@@ -48,7 +48,7 @@ namespace HanseaticAPI.Controllers
                 return BadRequest("Product not found.");
 
             product.CityId = requestDTO.CityId;
-            product.Product = requestDTO.Product;
+            product.ProductId = requestDTO.ProductId;
             product.DesiredAmount = requestDTO.DesiredAmount;
             product.ActualAmount = requestDTO.ActualAmount;
             product.BasePrice = requestDTO.BasePrice;

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HanseaticAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230117131407_CreateInitial")]
+    [Migration("20230118075239_CreateInitial")]
     partial class CreateInitial
     {
         /// <inheritdoc />
@@ -89,7 +89,7 @@ namespace HanseaticAPI.Migrations
                     b.Property<double>("MinAmountFluctation")
                         .HasColumnType("float");
 
-                    b.Property<int>("Product")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Save")
@@ -98,6 +98,8 @@ namespace HanseaticAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("CityProducts");
                 });
@@ -186,17 +188,20 @@ namespace HanseaticAPI.Migrations
             modelBuilder.Entity("HanseaticAPI.Models.CityProduct", b =>
                 {
                     b.HasOne("HanseaticAPI.Models.City", "City")
-                        .WithMany("CityProducts")
+                        .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("City");
-                });
+                    b.HasOne("HanseaticAPI.Models.ProductType", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("HanseaticAPI.Models.City", b =>
-                {
-                    b.Navigation("CityProducts");
+                    b.Navigation("City");
+
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

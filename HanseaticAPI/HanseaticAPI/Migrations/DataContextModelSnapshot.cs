@@ -89,7 +89,7 @@ namespace HanseaticAPI.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Save")
+                    b.Property<int>("SaveId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -97,6 +97,8 @@ namespace HanseaticAPI.Migrations
                     b.HasIndex("CityId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SaveId");
 
                     b.ToTable("CityProducts");
                 });
@@ -126,13 +128,15 @@ namespace HanseaticAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Account")
+                    b.Property<int>("AccountId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
 
                     b.ToTable("Saves");
                 });
@@ -152,10 +156,12 @@ namespace HanseaticAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Save")
+                    b.Property<int>("SaveId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SaveId");
 
                     b.ToTable("Ships");
                 });
@@ -200,9 +206,39 @@ namespace HanseaticAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HanseaticAPI.Models.Save", "Save")
+                        .WithMany()
+                        .HasForeignKey("SaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("City");
 
                     b.Navigation("Product");
+
+                    b.Navigation("Save");
+                });
+
+            modelBuilder.Entity("HanseaticAPI.Models.Save", b =>
+                {
+                    b.HasOne("HanseaticAPI.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("HanseaticAPI.Models.Ship", b =>
+                {
+                    b.HasOne("HanseaticAPI.Models.Save", "Save")
+                        .WithMany()
+                        .HasForeignKey("SaveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Save");
                 });
 
             modelBuilder.Entity("HanseaticAPI.Models.ShipProduct", b =>

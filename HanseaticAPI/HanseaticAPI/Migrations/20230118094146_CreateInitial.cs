@@ -58,26 +58,17 @@ namespace HanseaticAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Account = table.Column<int>(type: "int", nullable: false)
+                    AccountId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Saves", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ships",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Coin = table.Column<int>(type: "int", nullable: false),
-                    Save = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ships", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Saves_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,7 +84,7 @@ namespace HanseaticAPI.Migrations
                     BasePrice = table.Column<int>(type: "int", nullable: false),
                     MinAmountFluctation = table.Column<double>(type: "float", nullable: false),
                     MaxAmountFluctation = table.Column<double>(type: "float", nullable: false),
-                    Save = table.Column<int>(type: "int", nullable: false)
+                    SaveId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,6 +99,33 @@ namespace HanseaticAPI.Migrations
                         name: "FK_CityProducts_ProductTypes_ProductId",
                         column: x => x.ProductId,
                         principalTable: "ProductTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CityProducts_Saves_SaveId",
+                        column: x => x.SaveId,
+                        principalTable: "Saves",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ships",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Coin = table.Column<int>(type: "int", nullable: false),
+                    SaveId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ships", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ships_Saves_SaveId",
+                        column: x => x.SaveId,
+                        principalTable: "Saves",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -150,6 +168,16 @@ namespace HanseaticAPI.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CityProducts_SaveId",
+                table: "CityProducts",
+                column: "SaveId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Saves_AccountId",
+                table: "Saves",
+                column: "AccountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShipProducts_ProductTypeId",
                 table: "ShipProducts",
                 column: "ProductTypeId");
@@ -158,19 +186,18 @@ namespace HanseaticAPI.Migrations
                 name: "IX_ShipProducts_ShipId",
                 table: "ShipProducts",
                 column: "ShipId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ships_SaveId",
+                table: "Ships",
+                column: "SaveId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Accounts");
-
-            migrationBuilder.DropTable(
                 name: "CityProducts");
-
-            migrationBuilder.DropTable(
-                name: "Saves");
 
             migrationBuilder.DropTable(
                 name: "ShipProducts");
@@ -183,6 +210,12 @@ namespace HanseaticAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Ships");
+
+            migrationBuilder.DropTable(
+                name: "Saves");
+
+            migrationBuilder.DropTable(
+                name: "Accounts");
         }
     }
 }

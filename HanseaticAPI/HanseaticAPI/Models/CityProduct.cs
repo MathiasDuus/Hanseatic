@@ -17,7 +17,10 @@ namespace HanseaticAPI.Models
         public int BasePrice { get; set; }
         public double MinAmountFluctation { get; set; }
         public double MaxAmountFluctation { get; set; }
-        public int Save { get; set; }
+
+        [JsonIgnore]
+        public Save? Save { get; set; } = null!;
+        public int SaveId { get; set; }
 
     }
 }

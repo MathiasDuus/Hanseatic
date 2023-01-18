@@ -32,7 +32,7 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<ProductType>>> AddCityProduct(ProductTypeDTO typeDTO)
+        public async Task<ActionResult<List<ProductType>>> Add(ProductTypeDTO typeDTO)
         {
             var type = _mapper.Map<ProductType>(typeDTO);
             _context.ProductTypes.Add(type);
@@ -41,7 +41,7 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<List<ProductType>>> UpdateCityProduct(ProductType request)
+        public async Task<ActionResult<List<ProductType>>> Update(ProductType request)
         {
             var type = await _context.ProductTypes.FindAsync(request.Id);
             if (type == null)

@@ -32,7 +32,7 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Ship>>> AddCityProduct(ShipDTO ShipDTO)
+        public async Task<ActionResult<List<Ship>>> Add(ShipDTO ShipDTO)
         {
             var ship = _mapper.Map<Ship>(ShipDTO);
             _context.Ships.Add(ship);
@@ -41,7 +41,7 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<List<Ship>>> UpdateCityProduct(Ship request)
+        public async Task<ActionResult<List<Ship>>> Update(Ship request)
         {
             var Ship = await _context.Ships.FindAsync(request.Id);
             if (Ship == null)

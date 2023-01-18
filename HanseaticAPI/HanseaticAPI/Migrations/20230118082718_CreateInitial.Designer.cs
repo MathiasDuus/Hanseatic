@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HanseaticAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230117131407_CreateInitial")]
+    [Migration("20230118082718_CreateInitial")]
     partial class CreateInitial
     {
         /// <inheritdoc />
@@ -89,7 +89,7 @@ namespace HanseaticAPI.Migrations
                     b.Property<double>("MinAmountFluctation")
                         .HasColumnType("float");
 
-                    b.Property<int>("Product")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Save")
@@ -98,6 +98,8 @@ namespace HanseaticAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("CityProducts");
                 });
@@ -172,13 +174,17 @@ namespace HanseaticAPI.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Product")
+                    b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Ship")
+                    b.Property<int>("ShipId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductTypeId");
+
+                    b.HasIndex("ShipId");
 
                     b.ToTable("ShipProducts");
                 });
@@ -186,17 +192,39 @@ namespace HanseaticAPI.Migrations
             modelBuilder.Entity("HanseaticAPI.Models.CityProduct", b =>
                 {
                     b.HasOne("HanseaticAPI.Models.City", "City")
-                        .WithMany("CityProducts")
+                        .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HanseaticAPI.Models.ProductType", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("City");
+
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("HanseaticAPI.Models.City", b =>
+            modelBuilder.Entity("HanseaticAPI.Models.ShipProduct", b =>
                 {
-                    b.Navigation("CityProducts");
+                    b.HasOne("HanseaticAPI.Models.ProductType", "ProductType")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HanseaticAPI.Models.Ship", "Ship")
+                        .WithMany()
+                        .HasForeignKey("ShipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductType");
+
+                    b.Navigation("Ship");
                 });
 #pragma warning restore 612, 618
         }

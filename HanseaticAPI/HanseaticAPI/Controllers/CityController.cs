@@ -8,10 +8,12 @@ namespace HanseaticAPI.Controllers
     public class CityController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public CityController(DataContext context)
+        public CityController(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,9 +32,10 @@ namespace HanseaticAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<City>>> AddCityProduct(City product)
+        public async Task<ActionResult<List<City>>> AddCityProduct(CityDTO cityDTO)
         {
-            _context.Cities.Add(product);
+            var city = _mapper.Map<City>(cityDTO);
+            _context.Cities.Add(city);
             await _context.SaveChangesAsync();
             return Ok(await _context.Cities.ToListAsync());
         }

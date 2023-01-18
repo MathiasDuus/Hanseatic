@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using HanseaticAPI.Models;
+﻿using HanseaticAPI.Models;
 
 namespace HanseaticAPI
 {
@@ -7,8 +6,21 @@ namespace HanseaticAPI
     {
         public AutoMapperProfile()
         {
+            CreateMap<City, CityDTO>();
+            CreateMap<CityDTO, City>();
+
             CreateMap<CityProduct, CityProductDTO>();
             CreateMap<CityProductDTO, CityProduct>();
+
+
+            CreateMap<ProductType, ProductTypeDTO>();
+            CreateMap<ProductTypeDTO, ProductType>();
+
+            CreateMap<Ship, ShipDTO>();
+            CreateMap<ShipDTO, Ship>();
+
+            CreateMap<ShipProduct, ShipProductDTO>();
+            CreateMap<ShipProductDTO, ShipProduct>();
         }
 
     }

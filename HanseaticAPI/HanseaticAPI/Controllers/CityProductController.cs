@@ -27,7 +27,7 @@ namespace HanseaticAPI.Controllers
         {
             var product = await _context.CityProducts.FindAsync(id);
             if (product == null)
-                return BadRequest("Product not found.");
+                return BadRequest("City_Product not found.");
             return Ok(product);
         }
 

@@ -21,12 +21,17 @@ public partial class BuyPageViewModel : ObservableObject
 
     private async Task LoadCityProduct()
     {
-        var prod = await BuyManager.GetAll();
+        await Task.Delay(200);
+
+        int cityId = await BuyManager.GetCityIdByName(CityName);
+
+        var product = await BuyManager.GetAllByCityId(cityId);
+
         ProductsCollection = new ObservableCollection<CityProduct>();
 
-        foreach (var product in prod)
+        foreach (var prod in product)
         {
-            ProductsCollection.Add(product);
+            ProductsCollection.Add(prod);
         }
     }
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HanseaticAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230118094146_CreateInitial")]
+    [Migration("20230119072559_CreateInitial")]
     partial class CreateInitial
     {
         /// <inheritdoc />

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Hanseatic.Data;
 using Hanseatic.Model;
 
 namespace Hanseatic.ViewModel
@@ -23,6 +24,8 @@ namespace Hanseatic.ViewModel
             {
                 Name = Text
             };
+
+            await ShipManager.Post(Text);
 
             await Shell.Current.GoToAsync(nameof(MapPage));
         }

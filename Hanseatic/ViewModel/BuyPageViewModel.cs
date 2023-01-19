@@ -21,6 +21,7 @@ public partial class BuyPageViewModel : ObservableObject
 
     private async Task LoadCityProduct()
     {
+        // TODO: maybe use on page load
         await Task.Delay(200);
 
         int cityId = await BuyManager.GetCityIdByName(CityName);

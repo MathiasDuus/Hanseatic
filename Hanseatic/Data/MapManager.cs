@@ -1,4 +1,6 @@
-﻿namespace Hanseatic.Data
+﻿using System.Net.Http.Json;
+
+namespace Hanseatic.Data
 {
     internal class MapManager
     {
@@ -20,9 +22,16 @@
             return client;
         }
 
-        public static async Task<IEnumerable<Save>> GetAll()
+        public static async Task<Save> GetById(int id)
         {
-            throw new NotImplementedException();
+
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new Save();
+
+            HttpClient client = await GetClient();
+
+            return await client.GetFromJsonAsync<Save>($"{Url}/save/{id}");
         }
 
         public static async Task UpdateDate(Save save)

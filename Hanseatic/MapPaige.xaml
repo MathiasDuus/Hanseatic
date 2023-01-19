@@ -27,7 +27,7 @@
                 <RadioButton TextColor="White" TranslationX="337" TranslationY="760" Content="Amsterdam" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="418" TranslationY="787" Content="Bremen" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="466" TranslationY="760" Content="Hamburg" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="507" TranslationY="735" Content="Lûbeck" CheckedChanged="RadioButton_EnterCity"/>
+                <RadioButton TextColor="White" TranslationX="507" TranslationY="735" Content="Lubeck" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="408" TranslationY="586" Content="Esbjerg" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="469" TranslationY="442" Content="Frederikshavn" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="361" TranslationY="52" Content="Bergen" CheckedChanged="RadioButton_EnterCity"/>
@@ -35,14 +35,14 @@
                 <RadioButton TextColor="White" TranslationX="615" TranslationY="570" Content="Malmø" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="557" TranslationY="722" Content="Rostock" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="649" TranslationY="761" Content="Stettin" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="804" TranslationY="698" Content="Gdańsk" CheckedChanged="RadioButton_EnterCity"/>
+                <RadioButton TextColor="White" TranslationX="804" TranslationY="698" Content="Gdansk" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="808" TranslationY="799" Content="Bydgoszcz" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="792" TranslationY="377" Content="Visby" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="803" TranslationY="237" Content="Stockholm" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="985" TranslationY="440" Content="Riga" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="967" TranslationY="237" Content="Tallinn" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="1151" TranslationY="114" Content="Sankt Petersborg" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="1207" TranslationY="235" Content="Velikij Novgorod" CheckedChanged="RadioButton_EnterCity"/>    
+                <RadioButton TextColor="White" TranslationX="1207" TranslationY="235" Content="Velikij" CheckedChanged="RadioButton_EnterCity"/>    
 
             </AbsoluteLayout>
 

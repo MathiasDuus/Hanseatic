@@ -31,6 +31,9 @@ public partial class BuyPageViewModel : ObservableObject
 
         foreach (var prod in product)
         {
+            Product prodType = await BuyManager.GetProductById(prod.Id);
+
+            prod.Product = prodType.Name;
             ProductsCollection.Add(prod);
         }
     }

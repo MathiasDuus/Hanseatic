@@ -19,7 +19,7 @@ namespace Hanseatic.ViewModel
             // Make Post request to server, to store the name, and then go to the next page.
 
 
-            _ = new Player
+            _ = new Ship
             {
                 Name = Text
             };

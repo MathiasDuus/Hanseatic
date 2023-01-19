@@ -45,7 +45,7 @@ namespace HanseaticAPI.Controllers
         {
             var product = await _context.CityProducts.FindAsync(request.Id);
             if (product == null)
-                return BadRequest("Product not found.");
+                return BadRequest("City_Product not found.");
 
             product.CityId = request.CityId;
             product.ProductId = request.ProductId;
@@ -65,10 +65,24 @@ namespace HanseaticAPI.Controllers
         {
             var product = await _context.CityProducts.FindAsync(id);
             if (product == null)
-                return BadRequest("Product not found.");
+                return BadRequest("City_Product not found.");
             _context.CityProducts.Remove(product);
             await _context.SaveChangesAsync();
             return Ok(await _context.CityProducts.ToListAsync());
+        }
+
+        [HttpGet("GetByCityId/{id}")]
+        public async Task<ActionResult<List<CityProduct>>> GetProductByCityId(int id)
+        {
+            var product = _context.CityProducts.Where(c => c.CityId == id);
+            foreach (var prod in product)
+            {
+                int sellPrice = 1 + 1;
+            }
+
+            if (product == null)
+                return BadRequest("City_Product not found.");
+            return Ok(product);
         }
     }
 }

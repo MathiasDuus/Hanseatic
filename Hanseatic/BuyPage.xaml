@@ -105,27 +105,27 @@
                             <Label 
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                Text="{Binding CityId}"
+                                Text="{Binding ActualAmount}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Button 
                                 Style="{StaticResource Buy}"
                                 Grid.Row="0"
                                 Grid.Column="2"
-                                Text="{Binding BasePrice}"
+                                Text="{Binding BuyPrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Button 
                                 Style="{StaticResource Sell}"
                                 Grid.Row="0"
                                 Grid.Column="3"
-                                Text="{Binding BasePrice}"
+                                Text="{Binding SellPrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
                             <Label 
                                 Grid.Row="0"
                                 Grid.Column="4"
-                                Text="{Binding Save}"
+                                Text="Dummy text"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
 

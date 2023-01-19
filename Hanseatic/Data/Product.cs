@@ -1,6 +1,6 @@
-﻿namespace Hanseatic.Model
+﻿namespace Hanseatic.Data
 {
-    public class Player
+    internal class Product
     {
         public string Name { get; set; }
     }

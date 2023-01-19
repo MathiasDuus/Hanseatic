@@ -2,11 +2,8 @@
 
 namespace Hanseatic.Data
 {
-
-
     class BuyManager
     {
-        // TODO: Add fields for BaseAddress, Url, and authorizationKey
         static readonly string BaseAddress = "http://10.130.54.29:5000";
         static readonly string Url = $"{BaseAddress}/api";
 
@@ -73,7 +70,19 @@ namespace Hanseatic.Data
             HttpClient client = await GetClient();
 
 
-            return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product/{id}");
+            return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product/GetByCityId/{id}");
+        }
+
+        public static async Task<Product> GetProductById(int id)
+        {
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new Product();
+
+            HttpClient client = await GetClient();
+
+
+            return await client.GetFromJsonAsync<Product>($"{Url}/product_type/{id}");
         }
     }
 }

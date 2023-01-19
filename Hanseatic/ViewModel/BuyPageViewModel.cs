@@ -33,6 +33,14 @@ public partial class BuyPageViewModel : ObservableObject
         {
             Product prodType = await BuyManager.GetProductById(prod.Id);
 
+            prod.SellPrice = -30 * (2 * (prod.ActualAmount / prod.DesiredAmount) - 1) ^ 3 + prod.BasePrice;
+            if (prod.SellPrice < 0)
+            {
+                prod.SellPrice = 0;
+            }
+
+            prod.BuyPrice = prod.SellPrice + 3;
+
             prod.Product = prodType.Name;
             ProductsCollection.Add(prod);
         }

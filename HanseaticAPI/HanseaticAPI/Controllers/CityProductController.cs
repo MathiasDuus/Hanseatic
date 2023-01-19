@@ -75,10 +75,6 @@ namespace HanseaticAPI.Controllers
         public async Task<ActionResult<List<CityProduct>>> GetProductByCityId(int id)
         {
             var product = _context.CityProducts.Where(c => c.CityId == id);
-            foreach (var prod in product)
-            {
-                int sellPrice = 1 + 1;
-            }
 
             if (product == null)
                 return BadRequest("City_Product not found.");

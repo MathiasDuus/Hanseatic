@@ -65,5 +65,11 @@ namespace HanseaticAPI.Controllers
             await _context.SaveChangesAsync();
             return Ok(await _context.ShipProducts.ToListAsync());
         }
+
+        [HttpGet("GetProductsByShipId/{id}")]
+        public async Task<ActionResult<List<CityProduct>>> GetShipProducsByShipId(int id)
+        {
+            return Ok(await _context.ShipProducts.Where(c => c.ShipId == id).ToListAsync());
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace Hanseatic.Managers
 {
     class ShipManager
     {
-        // Adds api to the URI
+        // The url to call the API
         static readonly string Url = HttpClientManager.Url;
 
         /// <summary>
@@ -38,11 +38,7 @@ namespace Hanseatic.Managers
             // Converts the response to a string
             string result = await response.Content.ReadAsStringAsync();
 
-            // Deserializes the json string to a Ship object
-            Ship ApiShip = (Ship)Newtonsoft.Json.JsonConvert.DeserializeObject(result);
-
-            // Returns the created ship
-            return ApiShip;
+            return ship;
         }
     }
 }

@@ -27,9 +27,7 @@ namespace Hanseatic.ViewModel
                 Name = Text
             };
 
-            var ship = await ShipManager.Post(Text);
-
-            Console.WriteLine(ship);
+            await ShipManager.Post(Text);
 
             await Shell.Current.GoToAsync(nameof(MapPage));
         }

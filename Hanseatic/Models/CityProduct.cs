@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public int CityId { get; set; }
         public string Product { get; set; }
+        public int ProductID { get; set; }
         public int DesiredAmount { get; set; }
         public int ActualAmount { get; set; }
         public int BasePrice { get; set; }

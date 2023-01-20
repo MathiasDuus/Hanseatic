@@ -14,11 +14,11 @@
                     Source="map.png"
                     HorizontalOptions="Center" />
 
-                <!-- Coin and date -->
-                <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
-                <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="1301 Jan."/>
-
-                <!-- All the cities -->
+                    <!-- Coin and date -->
+                    <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
+                    <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="{Binding Date}"/>
+                    
+                        <!-- All the cities -->
                 <RadioButton TextColor="White" TranslationX="47" TranslationY="394" Content="Edinburgh" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="111" TranslationY="566" Content="Newcastle" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="81" TranslationY="790" Content="London" CheckedChanged="RadioButton_EnterCity"/>

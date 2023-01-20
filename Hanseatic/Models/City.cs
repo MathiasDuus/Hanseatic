@@ -1,4 +1,4 @@
-﻿namespace Hanseatic.Data
+﻿namespace Hanseatic.Models
 {
     public class City
     {

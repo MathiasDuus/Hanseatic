@@ -16,7 +16,7 @@ public partial class MapPage : ContentPage
         {
             if (e.Value)
             {
-                // Go To buypage
+                // Go To buypage, and send the name of the city with it
                 await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={radioButton.Content}");
             }
         }

@@ -2,8 +2,9 @@
 using Android.Runtime;
 
 namespace Hanseatic;
-[Application(UsesCleartextTraffic = true)]
 
+// Allows the use of http requests
+[Application(UsesCleartextTraffic = true)]
 public class MainApplication : MauiApplication
 {
     public MainApplication(IntPtr handle, JniHandleOwnership ownership)

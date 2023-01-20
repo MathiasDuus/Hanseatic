@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Hanseatic.MapPage"
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
              x:DataType="viewmodel:MapPageViewModel"
              Title="Map">
-
+    
     <ScrollView Orientation="Vertical">
         <ScrollView Orientation="Horizontal">
 
@@ -13,13 +14,22 @@
                 <Image
                     Source="map.png"
                     HorizontalOptions="Center" />
-
-                    <!-- Coin and date -->
-                    <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
-                    <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="{Binding Date}"/>
+                
+                <!-- Coin and date -->
+                <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
+                <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="{Binding Date}"/>
                     
-                        <!-- All the cities -->
-                <RadioButton TextColor="White" TranslationX="47" TranslationY="394" Content="Edinburgh" CheckedChanged="RadioButton_EnterCity"/>
+                <!-- All the cities -->
+                <RadioButton TextColor="White" TranslationX="47" TranslationY="394" Content="Edinburgh">
+                    <RadioButton.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            x:DataType="{x:Type RadioButton}"
+                            EventName="CheckedChanged"
+                            Command="{Binding Source={RelativeSource  AncestorType={x:Type viewmodel:MapPageViewModel}}, Path=EnterCityCommand}"
+                            CommandParameter="{Binding}"/>
+                    </RadioButton.Behaviors>
+
+                </RadioButton>
                 <RadioButton TextColor="White" TranslationX="111" TranslationY="566" Content="Newcastle" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="81" TranslationY="790" Content="London" CheckedChanged="RadioButton_EnterCity"/>
                 <RadioButton TextColor="White" TranslationX="203" TranslationY="879" Content="Antwerpen" CheckedChanged="RadioButton_EnterCity"/>

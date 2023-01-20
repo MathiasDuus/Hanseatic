@@ -1,26 +1,12 @@
-﻿using System.Net.Http.Json;
+﻿using Hanseatic.Models;
+using System.Net.Http.Json;
 
-namespace Hanseatic.Data
+namespace Hanseatic.Managers
 {
     class BuyManager
     {
-        static readonly string BaseAddress = "http://10.130.54.29:5000";
-        static readonly string Url = $"{BaseAddress}/api";
-
-        static HttpClient client;
-
-        private static async Task<HttpClient> GetClient()
-        {
-            if (client is not null)
-                return client;
-
-
-            client = new HttpClient();
-
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-
-            return client;
-        }
+        // The url used to make calls to API
+        static readonly string Url = HttpClientManager.Url;
 
         public static async Task<IEnumerable<CityProduct>> GetAll()
         {
@@ -28,8 +14,10 @@ namespace Hanseatic.Data
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new List<CityProduct>();
 
-            HttpClient client = await GetClient();
+            // Gets the client used to make http requests
+            HttpClient client = await HttpClientManager.GetClient();
 
+            // Waits for the request to finish
             return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product");
         }
 
@@ -48,40 +36,60 @@ namespace Hanseatic.Data
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the city ID via the name of the city
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static async Task<int> GetCityIdByName(string name)
         {
             // Check for internet, might have to disable, bc emulator
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return -1;
 
-            HttpClient client = await GetClient();
+            // Gets the client used to make http requests
+            HttpClient client = await HttpClientManager.GetClient();
 
+            // Gets the city from the API
             City respone = await client.GetFromJsonAsync<City>($"{Url}/city/GetByName/{name}");
 
+            // Returns only the ID
             return respone.Id;
         }
 
+        /// <summary>
+        /// Gets all the products in the city via city ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static async Task<IEnumerable<CityProduct>> GetAllByCityId(int id)
         {
             // Check for internet, might have to disable, bc emulator
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new List<CityProduct>();
 
-            HttpClient client = await GetClient();
+            // Gets the client used to make http requests
+            HttpClient client = await HttpClientManager.GetClient();
 
-
+            // Returns a list of products in the city
             return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product/GetByCityId/{id}");
         }
 
+        /// <summary>
+        /// Gets the product via Product ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static async Task<Product> GetProductById(int id)
         {
             // Check for internet, might have to disable, bc emulator
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new Product();
 
-            HttpClient client = await GetClient();
+            // Gets the client used to make http requests
+            HttpClient client = await HttpClientManager.GetClient();
 
-
+            // Returns the product
             return await client.GetFromJsonAsync<Product>($"{Url}/product_type/{id}");
         }
     }

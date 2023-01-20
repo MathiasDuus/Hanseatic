@@ -1,4 +1,4 @@
-﻿namespace Hanseatic.Model
+﻿namespace Hanseatic.Models
 {
     public class Ship
     {

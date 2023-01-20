@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hanseatic.BuyPage"
-             xmlns:data="clr-namespace:Hanseatic.Data"
+             xmlns:data="clr-namespace:Hanseatic.Models"
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
              x:DataType="viewmodel:BuyPageViewModel"
              Title="{Binding CityName}">
@@ -19,26 +19,26 @@
         
         <!-- ROW 0: Title -->
         <Label
-        x:Name="result"
-        Grid.ColumnSpan="5"
-        FontAttributes="Bold"
-        FontSize="26"
-        HorizontalTextAlignment="Center"
-        VerticalTextAlignment="Center"
-        Text="Trading Goods"
-        TextColor="Black"/>
+            x:Name="result"
+            Grid.ColumnSpan="5"
+            FontAttributes="Bold"
+            FontSize="26"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            Text="Trading Goods"
+            TextColor="Black"/>
 
         <!-- ROW 1: Titles -->
         <Label
-        HorizontalTextAlignment="End"
-        VerticalTextAlignment="Center"
-        Grid.Row="1"
-        Grid.Column="0"
-        Padding="0,0,10,0"
-        FontAttributes="Bold"
-        FontSize="14"
-        Text="Goods"
-        TextColor="Black"/>
+            HorizontalTextAlignment="End"
+            VerticalTextAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="0"
+            Padding="0,0,10,0"
+            FontAttributes="Bold"
+            FontSize="14"
+            Text="Goods"
+            TextColor="Black"/>
 
         <Label
             HorizontalTextAlignment="Center"
@@ -94,6 +94,8 @@
                             Padding="10"
                             RowDefinitions="*"
                             ColumnDefinitions="*, *, *, *, *">
+                            
+                            <!-- Product name -->
                             <Label 
                                 Grid.Row="0"
                                 Padding="0,0,10,0"
@@ -102,12 +104,14 @@
                                 LineBreakMode="NoWrap"
                                 VerticalOptions="Center"
                                 HorizontalOptions="End"/>
+                            <!-- How much a city have -->
                             <Label 
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Text="{Binding ActualAmount}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
+                            <!-- How much to buy -->
                             <Button 
                                 Style="{StaticResource Buy}"
                                 Grid.Row="0"
@@ -115,6 +119,7 @@
                                 Text="{Binding BuyPrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
+                            <!-- How much to get for selling -->
                             <Button 
                                 Style="{StaticResource Sell}"
                                 Grid.Row="0"
@@ -122,6 +127,7 @@
                                 Text="{Binding SellPrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
+                            <!-- How much product on ship -->
                             <Label 
                                 Grid.Row="0"
                                 Grid.Column="4"

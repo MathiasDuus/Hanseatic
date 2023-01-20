@@ -1,4 +1,5 @@
-﻿using Hanseatic.ViewModel;
+﻿using CommunityToolkit.Maui;
+using Hanseatic.ViewModel;
 using Microsoft.Extensions.Logging;
 
 namespace Hanseatic;
@@ -10,6 +11,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			// Initialize the .NET MAUI Community Toolkit
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

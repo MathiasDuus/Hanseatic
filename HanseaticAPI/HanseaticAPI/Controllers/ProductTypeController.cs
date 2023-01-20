@@ -19,48 +19,71 @@ namespace HanseaticAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductType>>> Get()
         {
+            // Return all product types
             return Ok(await _context.ProductTypes.ToListAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ProductType>>> Get(int id)
         {
-            var type = await _context.ProductTypes.FindAsync(id);
-            if (type == null)
+            // Check if product type exists
+            var productType = await _context.ProductTypes.FindAsync(id);
+            if (productType == null)
                 return BadRequest("Product Type not found.");
-            return Ok(type);
+
+            // Return product type
+            return Ok(productType);
         }
 
         [HttpPost]
         public async Task<ActionResult<List<ProductType>>> Add(ProductTypeDTO typeDTO)
         {
-            var type = _mapper.Map<ProductType>(typeDTO);
-            _context.ProductTypes.Add(type);
+            // Map product type DTO to product type
+            var productType = _mapper.Map<ProductType>(typeDTO);
+
+            // Add product type to product types
+            _context.ProductTypes.Add(productType);
+
+            // Save changes
             await _context.SaveChangesAsync();
-            return Ok(await _context.ProductTypes.ToListAsync());
+
+            // Return product type
+            return Ok(productType);
         }
 
         [HttpPut]
         public async Task<ActionResult<List<ProductType>>> Update(ProductType request)
         {
-            var type = await _context.ProductTypes.FindAsync(request.Id);
-            if (type == null)
+            // Check if product type exists
+            var productType = await _context.ProductTypes.FindAsync(request.Id);
+            if (productType == null)
                 return BadRequest("Product Type not found.");
 
-            type.Name = request.Name;
+            // Apply request changes to product type
+            productType.Name = request.Name;
 
+            // Save changes
             await _context.SaveChangesAsync();
-            return Ok(await _context.ProductTypes.ToListAsync());
+
+            // Return product type
+            return Ok(productType);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<ProductType>>> Delete(int id)
         {
-            var Type = await _context.ProductTypes.FindAsync(id);
-            if (Type == null)
+            // Check if product type exists
+            var productType = await _context.ProductTypes.FindAsync(id);
+            if (productType == null)
                 return BadRequest("Product Type not found.");
-            _context.ProductTypes.Remove(Type);
+
+            // Remove product type from product types
+            _context.ProductTypes.Remove(productType);
+
+            // Save changes
             await _context.SaveChangesAsync();
+
+            // Return all product Types
             return Ok(await _context.ProductTypes.ToListAsync());
         }
     }

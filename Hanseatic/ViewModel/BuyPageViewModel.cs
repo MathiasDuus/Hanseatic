@@ -39,7 +39,7 @@ public partial class BuyPageViewModel : ObservableObject
         int cityId = await BuyManager.GetCityIdByName(CityName);
 
         // Gets alle the products from the API
-        IEnumerable<CityProduct> product = await BuyManager.GetAllByCityId(cityId);
+        var product = await BuyManager.GetAllByCityId(cityId);
 
         // Creates a new collection in the observed collection
         ProductsCollection = new ObservableCollection<CityProduct>();
@@ -48,7 +48,7 @@ public partial class BuyPageViewModel : ObservableObject
         foreach (CityProduct prod in product)
         {
             // Gets all the info on the product from the API
-            Product prodType = await BuyManager.GetProductById(prod.Id);
+            Product prodType = await BuyManager.GetProductById(prod.ProductID);
 
             // Calculates the price at which it should be sold
             prod.SellPrice = -30 * (2 * (prod.ActualAmount / prod.DesiredAmount) - 1) ^ 3 + prod.BasePrice;

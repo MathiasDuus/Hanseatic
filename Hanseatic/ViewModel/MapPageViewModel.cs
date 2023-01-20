@@ -15,7 +15,7 @@ namespace Hanseatic.ViewModel
         [ObservableProperty]
         string date;
 
-        // The selected radiobutton. Not used currently, I thinnk.
+        // The selected radiobutton. Not used currently, I think.
         [ObservableProperty]
         RadioButton selection;
 

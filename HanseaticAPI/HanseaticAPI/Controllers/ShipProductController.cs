@@ -16,6 +16,10 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all Products on a Ship
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<ShipProduct>>> Get()
         {
@@ -23,11 +27,16 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.ShipProducts.ToListAsync());
         }
 
+        /// <summary>
+        /// Gets ship product by ShipProductID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ShipProduct>>> Get(int id)
         {
             // Check if ship product exists
-            var shipProduct = await _context.ShipProducts.FindAsync(id);
+            ShipProduct? shipProduct = await _context.ShipProducts.FindAsync(id);
             if (shipProduct == null)
                 return BadRequest("Ship Product not found.");
 
@@ -35,16 +44,21 @@ namespace HanseaticAPI.Controllers
             return Ok(shipProduct);
         }
 
+        /// <summary>
+        /// Create a new ship product
+        /// </summary>
+        /// <param name="productDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<ShipProduct>>> Add(ShipProductDTO productDTO)
         {
             // Check if ship exists
-            var ship = await _context.Ships.FindAsync(productDTO.ShipId);
+            Ship? ship = await _context.Ships.FindAsync(productDTO.ShipId);
             if (ship == null)
                 return BadRequest("Ship not found.");
 
             // Map ship product DTO to ship product
-            var shipProduct = _mapper.Map<ShipProduct>(productDTO);
+            ShipProduct shipProduct = _mapper.Map<ShipProduct>(productDTO);
 
             // Add ship product to ship products
             _context.ShipProducts.Add(shipProduct);
@@ -56,16 +70,21 @@ namespace HanseaticAPI.Controllers
             return Ok(shipProduct);
         }
 
+        /// <summary>
+        /// Updates one product on the ship
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<ShipProduct>>> Update(ShipProduct request)
         {
             // Check if ship product exists
-            var shipProduct = await _context.ShipProducts.FindAsync(request.Id);
+            ShipProduct? shipProduct = await _context.ShipProducts.FindAsync(request.Id);
             if (shipProduct == null)
                 return BadRequest("Product not found.");
 
             // Check if ship exists
-            var ship = await _context.Ships.FindAsync(request.ShipId);
+            Ship? ship = await _context.Ships.FindAsync(request.ShipId);
             if (ship == null)
                 return BadRequest("Ship not found.");
 
@@ -81,11 +100,16 @@ namespace HanseaticAPI.Controllers
             return Ok(shipProduct);
         }
 
+        /// <summary>
+        /// Removes a product from the ship
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<ShipProduct>>> Delete(int id)
         {
             // Check if ship product exists
-            var shipProduct = await _context.ShipProducts.FindAsync(id);
+            ShipProduct? shipProduct = await _context.ShipProducts.FindAsync(id);
             if (shipProduct == null)
                 return BadRequest("Product not found.");
 
@@ -99,6 +123,11 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.ShipProducts.ToListAsync());
         }
 
+        /// <summary>
+        /// Gets all the products on a ship by its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("GetProductsByShipId/{id}")]
         public async Task<ActionResult<List<CityProduct>>> GetShipProducsByShipId(int id)
         {

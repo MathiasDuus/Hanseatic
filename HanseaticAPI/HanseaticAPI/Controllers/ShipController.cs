@@ -16,6 +16,10 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all ships
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Ship>>> Get()
         {
@@ -23,6 +27,11 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.Ships.ToListAsync());
         }
 
+        /// <summary>
+        /// Get a single ship by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Ship>>> Get(int id)
         {
@@ -35,16 +44,21 @@ namespace HanseaticAPI.Controllers
             return Ok(ship);
         }
 
+        /// <summary>
+        /// Create a new ship
+        /// </summary>
+        /// <param name="shipDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<Ship>>> Add(ShipDTO shipDTO)
         {
             // Check if save exists
-            var save = await _context.Saves.FindAsync(shipDTO.SaveId);
+            Save? save = await _context.Saves.FindAsync(shipDTO.SaveId);
             if (save == null)
                 return BadRequest("Save not found.");
 
             // Map shipDTO to ship
-            var ship = _mapper.Map<Ship>(shipDTO);
+            Ship? ship = _mapper.Map<Ship>(shipDTO);
 
             // Add ship to ships
             _context.Ships.Add(ship);
@@ -56,16 +70,21 @@ namespace HanseaticAPI.Controllers
             return Ok(ship);
         }
 
+        /// <summary>
+        /// Update a ship
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<Ship>>> Update(Ship request)
         {
             // Check if save exists
-            var save = await _context.Saves.FindAsync(request.SaveId);
+            Save? save = await _context.Saves.FindAsync(request.SaveId);
             if (save == null)
                 return BadRequest("Save not found.");
 
             // Check if ship exists
-            var ship = await _context.Ships.FindAsync(request.Id);
+            Ship? ship = await _context.Ships.FindAsync(request.Id);
             if (ship == null)
                 return BadRequest("Ship not found.");
 
@@ -81,11 +100,16 @@ namespace HanseaticAPI.Controllers
             return Ok(ship);
         }
 
+        /// <summary>
+        /// Delete a ship
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Ship>>> Delete(int id)
         {
             // Check if ship exists
-            var ship = await _context.Ships.FindAsync(id);
+            Ship? ship = await _context.Ships.FindAsync(id);
             if (ship == null)
                 return BadRequest("Ship not found.");
 

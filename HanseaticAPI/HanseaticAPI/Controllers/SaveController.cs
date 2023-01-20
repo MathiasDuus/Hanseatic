@@ -16,6 +16,10 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Gets all saves
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Save>>> Get()
         {
@@ -23,11 +27,16 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.Saves.ToListAsync());
         }
 
+        /// <summary>
+        /// Gets a single save by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Save>>> Get(int id)
         {
             // Check if save exists
-            var save = await _context.Saves.FindAsync(id);
+            Save? save = await _context.Saves.FindAsync(id);
             if (save == null)
                 return BadRequest("Save not found.");
 
@@ -35,16 +44,21 @@ namespace HanseaticAPI.Controllers
             return Ok(save);
         }
 
+        /// <summary>
+        /// Creates a new save
+        /// </summary>
+        /// <param name="saveDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<Save>>> Add(SaveDTO saveDTO)
         {
             // Check if account exists
-            var account = await _context.Accounts.FindAsync(saveDTO.AccountId);
+            Account? account = await _context.Accounts.FindAsync(saveDTO.AccountId);
             if (account == null)
                 return BadRequest("Account not found.");
 
             // Map saveDTO to save
-            var save = _mapper.Map<Save>(saveDTO);
+            Save? save = _mapper.Map<Save>(saveDTO);
 
             // Add save to saves
             _context.Saves.Add(save);
@@ -56,16 +70,21 @@ namespace HanseaticAPI.Controllers
             return Ok(save);
         }
 
+        /// <summary>
+        /// Updates an exsisting save
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<Save>>> Update(Save request)
         {
             // Check if save exists
-            var save = await _context.Saves.FindAsync(request.Id);
+            Save? save = await _context.Saves.FindAsync(request.Id);
             if (save == null)
                 return BadRequest("Save not found.");
 
             // Check if account exists
-            var account = await _context.Accounts.FindAsync(request.AccountId);
+            Account? account = await _context.Accounts.FindAsync(request.AccountId);
             if (account == null)
                 return BadRequest("Account not found.");
 
@@ -80,11 +99,16 @@ namespace HanseaticAPI.Controllers
             return Ok(save);
         }
 
+        /// <summary>
+        /// Deletes a save
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Save>>> Delete(int id)
         {
             // Check if save exists
-            var save = await _context.Saves.FindAsync(id);
+            Save? save = await _context.Saves.FindAsync(id);
             if (save == null)
                 return BadRequest("Save not found.");
 

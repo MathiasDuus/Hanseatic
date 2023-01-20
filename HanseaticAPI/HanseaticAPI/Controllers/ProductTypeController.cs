@@ -16,6 +16,10 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Gets all productypes
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<ProductType>>> Get()
         {
@@ -23,6 +27,11 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.ProductTypes.ToListAsync());
         }
 
+        /// <summary>
+        /// Gets a single product by ProductID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ProductType>>> Get(int id)
         {
@@ -35,11 +44,16 @@ namespace HanseaticAPI.Controllers
             return Ok(productType);
         }
 
+        /// <summary>
+        /// Create a new product
+        /// </summary>
+        /// <param name="typeDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<ProductType>>> Add(ProductTypeDTO typeDTO)
         {
             // Map product type DTO to product type
-            var productType = _mapper.Map<ProductType>(typeDTO);
+            ProductType? productType = _mapper.Map<ProductType>(typeDTO);
 
             // Add product type to product types
             _context.ProductTypes.Add(productType);
@@ -51,11 +65,16 @@ namespace HanseaticAPI.Controllers
             return Ok(productType);
         }
 
+        /// <summary>
+        /// Updates a product
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<ProductType>>> Update(ProductType request)
         {
             // Check if product type exists
-            var productType = await _context.ProductTypes.FindAsync(request.Id);
+            ProductType? productType = await _context.ProductTypes.FindAsync(request.Id);
             if (productType == null)
                 return BadRequest("Product Type not found.");
 
@@ -69,11 +88,16 @@ namespace HanseaticAPI.Controllers
             return Ok(productType);
         }
 
+        /// <summary>
+        /// Deletes a product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<ProductType>>> Delete(int id)
         {
             // Check if product type exists
-            var productType = await _context.ProductTypes.FindAsync(id);
+            ProductType? productType = await _context.ProductTypes.FindAsync(id);
             if (productType == null)
                 return BadRequest("Product Type not found.");
 

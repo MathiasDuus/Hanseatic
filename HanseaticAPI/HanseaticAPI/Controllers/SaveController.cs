@@ -19,49 +19,82 @@ namespace HanseaticAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Save>>> Get()
         {
+            // Return all saves
             return Ok(await _context.Saves.ToListAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Save>>> Get(int id)
         {
-            var product = await _context.Saves.FindAsync(id);
-            if (product == null)
-                return BadRequest("Ship not found.");
-            return Ok(product);
+            // Check if save exists
+            var save = await _context.Saves.FindAsync(id);
+            if (save == null)
+                return BadRequest("Save not found.");
+
+            // Return save
+            return Ok(save);
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Save>>> Add(SaveDTO SaveDTO)
+        public async Task<ActionResult<List<Save>>> Add(SaveDTO saveDTO)
         {
-            var save = _mapper.Map<Save>(SaveDTO);
+            // Check if account exists
+            var account = await _context.Accounts.FindAsync(saveDTO.AccountId);
+            if (account == null)
+                return BadRequest("Account not found.");
+
+            // Map saveDTO to save
+            var save = _mapper.Map<Save>(saveDTO);
+
+            // Add save to saves
             _context.Saves.Add(save);
+
+            // Save changes
             await _context.SaveChangesAsync();
-            return Ok(await _context.Saves.ToListAsync());
+
+            // Return save
+            return Ok(save);
         }
 
         [HttpPut]
         public async Task<ActionResult<List<Save>>> Update(Save request)
         {
-            var Ship = await _context.Saves.FindAsync(request.Id);
-            if (Ship == null)
-                return BadRequest("Ship not found.");
+            // Check if save exists
+            var save = await _context.Saves.FindAsync(request.Id);
+            if (save == null)
+                return BadRequest("Save not found.");
 
-            Ship.Date = request.Date;
-            Ship.AccountId = request.AccountId;
+            // Check if account exists
+            var account = await _context.Accounts.FindAsync(request.AccountId);
+            if (account == null)
+                return BadRequest("Account not found.");
 
+            // Apply request changes to save
+            save.Date = request.Date;
+            save.AccountId = request.AccountId;
+
+            // Save Changes
             await _context.SaveChangesAsync();
-            return Ok(await _context.Saves.ToListAsync());
+
+            // Return save
+            return Ok(save);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Save>>> Delete(int id)
         {
+            // Check if save exists
             var save = await _context.Saves.FindAsync(id);
             if (save == null)
-                return BadRequest("Ship not found.");
+                return BadRequest("Save not found.");
+
+            // Remove save from saves
             _context.Saves.Remove(save);
+
+            // Save changes
             await _context.SaveChangesAsync();
+
+            // Return all saves
             return Ok(await _context.Saves.ToListAsync());
         }
     }

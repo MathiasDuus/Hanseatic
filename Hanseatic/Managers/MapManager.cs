@@ -69,11 +69,5 @@ namespace Hanseatic.Managers
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<Save>(json);
         }
-
-        public static async Task Delete(string saveID)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

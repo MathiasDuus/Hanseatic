@@ -5,11 +5,18 @@ using Hanseatic.Models;
 
 namespace Hanseatic.ViewModel
 {
+
+    // A parameter send via the shell
+    [QueryProperty("Ship", "ship")]
     public partial class MapPageViewModel : ObservableObject
     {
         // Just an object of the current save game
         [ObservableProperty]
         Save currentGame;
+
+        // The ship
+        [ObservableProperty]
+        Ship ship;
 
         // Formated version of the date
         [ObservableProperty]
@@ -22,7 +29,7 @@ namespace Hanseatic.ViewModel
         public MapPageViewModel()
         {
             // Gets the current save
-            LoadSave();
+            Load();
         }
 
         /// <summary>
@@ -30,7 +37,7 @@ namespace Hanseatic.ViewModel
         /// And sets the date
         /// </summary>
         /// <returns></returns>
-        private async Task LoadSave()
+        private async Task Load()
         {
             CurrentGame = await MapManager.GetSaveById(1);
 

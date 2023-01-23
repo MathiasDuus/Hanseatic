@@ -1,4 +1,5 @@
 ﻿using Hanseatic.Models;
+using Newtonsoft.Json;
 using System.Text;
 
 namespace Hanseatic.Managers
@@ -63,7 +64,7 @@ namespace Hanseatic.Managers
             // Converts the response to a string
             string result = await response.Content.ReadAsStringAsync();
 
-            return ship;
+            return JsonConvert.DeserializeObject<Ship>(result); ;
         }
     }
 }

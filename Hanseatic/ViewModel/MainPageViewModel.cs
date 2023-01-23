@@ -27,9 +27,15 @@ namespace Hanseatic.ViewModel
                 Name = Text
             };
 
-            await ShipManager.Post(Text);
+            Ship postShip = await ShipManager.Post(Text);
 
-            await Shell.Current.GoToAsync(nameof(MapPage));
+            var ship = new Dictionary<string, object>
+            {
+                {"ship", postShip }
+            };
+
+            // Goes to the map
+            await Shell.Current.GoToAsync($"{nameof(MapPage)}", ship);
         }
     }
 }

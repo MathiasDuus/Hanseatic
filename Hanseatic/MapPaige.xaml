@@ -17,6 +17,7 @@
                 
                 <!-- Coin and date -->
                 <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
+                <Label TranslationX="1075" TranslationY="50" FontAttributes="Bold" Text="{Binding Ship.Coin}"/>
                 <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="{Binding Date}"/>
 
                 <!-- All the cities -->

@@ -1,4 +1,5 @@
 ﻿using Hanseatic.Models;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
 
 namespace Hanseatic.Managers
@@ -61,6 +62,22 @@ namespace Hanseatic.Managers
             throw new NotImplementedException();
         }
 
+        public static async Task<Ship> PutShip(Ship ship)
+        {
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new Ship();
+
+            // Gets the client used to make http requests
+            HttpClient client = await GetClient();
+
+            // Returns a list of products in the city
+            var response = await client.PutAsJsonAsync<Ship>($"{Url}/ship/", ship);
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Ship>(json);
+        }
+
         /// <summary>
         /// Gets the city ID via the name of the city
         /// </summary>
@@ -118,17 +135,43 @@ namespace Hanseatic.Managers
             return await client.GetFromJsonAsync<Product>($"{Url}/product_type/{id}");
         }
 
-        public static async Task<IEnumerable<CityProduct>> GetAllByShipId(int id)
+        public static async Task<Ship> GetShipById(int id)
         {
             // Check for internet, might have to disable, bc emulator
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return new List<CityProduct>();
+                return new Ship();
 
             // Gets the client used to make http requests
             HttpClient client = await GetClient();
 
-            // Returns a list of products in the city
-            return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/ship_product/GetByShipId/{id}");
+            // Returns the product
+            return await client.GetFromJsonAsync<Ship>($"{Url}/ship/{id}");
+        }
+
+        public static async Task<CityProduct> GetCityProductById(int id)
+        {
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new CityProduct();
+
+            // Gets the client used to make http requests
+            HttpClient client = await GetClient();
+
+            // Returns the product
+            return await client.GetFromJsonAsync<CityProduct>($"{Url}/city_product/{id}");
+        }
+
+        public static async Task<IEnumerable<ShipProduct>> GetAllByShipId(int id)
+        {
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new List<ShipProduct>();
+
+            // Gets the client used to make http requests
+            HttpClient client = await GetClient();
+
+            // Returns a list of products in the ship
+            return await client.GetFromJsonAsync<IEnumerable<ShipProduct>>($"{Url}/ship_product/GetByShipId/{id}");
         }
     }
 }

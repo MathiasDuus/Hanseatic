@@ -129,7 +129,7 @@ namespace HanseaticAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("GetByShipId/{id}")]
-        public async Task<ActionResult<List<CityProduct>>> GetShipProducsByShipId(int id)
+        public async Task<ActionResult<List<ShipProduct>>> GetByShipId(int id)
         {
             // Return all ship products where ship id is input id
             return Ok(await _context.ShipProducts.Where(c => c.ShipId == id).ToListAsync());

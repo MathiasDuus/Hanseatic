@@ -91,7 +91,7 @@ namespace HanseaticAPI.Controllers
             // Apply request changes to ship
             ship.Name = request.Name;
             ship.Coin = request.Coin;
-            ship.Save = request.Save;
+            ship.SaveId = request.SaveId;
 
             // Save ships
             await _context.SaveChangesAsync();

@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Hanseatic.Managers;
 using Hanseatic.Models;
 using System.Collections.ObjectModel;
@@ -28,10 +29,7 @@ public partial class BuyPageViewModel : ObservableObject
     private async Task LoadProducts()
     {
         // Get ship id
-        // int shipId = 1;
-
-        // Gets all the products from the API
-        // var shipProducts = await BuyManager.GetAllByShipId(shipId);
+        int shipId = 3;
 
         // Used to endure that "CityName" is set
         await Task.Delay(200);
@@ -41,6 +39,9 @@ public partial class BuyPageViewModel : ObservableObject
 
         // Gets all the products from the API
         var product = await BuyManager.GetAllByCityId(cityId);
+
+        // Gets all the products from the API
+        var shipProducts = await BuyManager.GetAllByShipId(shipId);
 
         // Creates a new collection in the observed collection
         ProductsCollection = new ObservableCollection<CityProduct>();
@@ -66,82 +67,42 @@ public partial class BuyPageViewModel : ObservableObject
             // Sets the product name
             prod.Product = prodType.Name;
 
-            /*
-            foreach (var shipProduct in shipProducts)
+            foreach (ShipProduct shipProduct in shipProducts)
             {
-                if (shipProduct.ProductID == prod.ProductID)
-                {
-                    prod.ShipProductAmount = shipProduct.ActualAmount;
-                }
                 prod.ShipProductAmount = 0;
+                if (shipProduct.ProductTypeID == prod.ProductID)
+                {
+                    prod.ShipProductAmount = shipProduct.Amount;
+                }
             }
-            */
 
             // Adds the product to the collection
             ProductsCollection.Add(prod);
         }
     }
 
-    /*
-    private async Task LoadShipProduct()
+    [RelayCommand]
+    public async void Buy(int cityProductId)
     {
-        // Get ship id
-        int shipId = 1;
-        //await BuyManager.GetShipIdByName(ShipName);
+        int shipId = 3;
 
-        // Gets all the products from the API
-        var shipProduct = await BuyManager.GetAllByShipId(shipId);
+        // Get the product from the api
+        CityProduct product = productsCollection[cityProductId];
 
-    }
-    */
+        // Get the ship from the api
+        Ship ship = await BuyManager.GetShipById(shipId);
 
-    /// <summary>
-    /// Calls the api to get all the products in the city and 
-    /// adds them to the observed product collection
-    /// </summary>
-    /// <returns></returns>
-    /*
-    private async Task LoadCityProduct()
-    {
-        // TODO: maybe use on page load
+        int Coins = ship.Coin - product.BuyPrice;
 
-        // Used to endure that "CityName" is set
-        await Task.Delay(200);
-
-        // Call api to get the id of the city
-        int cityId = await BuyManager.GetCityIdByName(CityName);
-
-        // Gets all the products from the API
-        var product = await BuyManager.GetAllByCityId(cityId);
-
-        // Creates a new collection in the observed collection
-        ProductsCollection = new ObservableCollection<CityProduct>();
-
-        // Loops over the respone from the API
-        foreach (CityProduct prod in product)
+        var newShip = new Ship
         {
-            // Gets all the info on the product from the API
-            Product prodType = await BuyManager.GetProductById(prod.ProductID);
+            Id = shipId,
+            Name = ship.Name,
+            Coin = Coins,
+            SaveId = ship.SaveId
+        };
 
-            // Calculates the price at which it should be sold
-            prod.SellPrice = -30 * (2 * (prod.ActualAmount / prod.DesiredAmount) - 1) ^ 3 + prod.BasePrice;
-
-            // If the sell price is below 0, it should just be 0
-            if (prod.SellPrice < 0)
-            {
-                prod.SellPrice = 0;
-            }
-
-            // The price which the player pays to get a product
-            prod.BuyPrice = prod.SellPrice + 3;
-
-            // Sets the product name
-            prod.Product = prodType.Name;
-
-            // Adds the product to the collection
-            ProductsCollection.Add(prod);
-        }
+        await BuyManager.PutShip(newShip);
     }
-    */
 
 }

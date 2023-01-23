@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Hanseatic.Managers;
 using Hanseatic.Models;
 using System.Collections.ObjectModel;
@@ -20,17 +21,15 @@ public partial class BuyPageViewModel : ObservableObject
     public BuyPageViewModel()
     {
         // Get all the products in the city
-        LoadCityProduct();
+        //LoadCityProduct();
+        //LoadShipProduct();
+        LoadProducts();
     }
 
-    /// <summary>
-    /// Calls the api to get all the products in the city and 
-    /// adds them to the observed product collection
-    /// </summary>
-    /// <returns></returns>
-    private async Task LoadCityProduct()
+    private async Task LoadProducts()
     {
-        // TODO: maybe use on page load
+        // Get ship id
+        int shipId = 3;
 
         // Used to endure that "CityName" is set
         await Task.Delay(200);
@@ -38,8 +37,11 @@ public partial class BuyPageViewModel : ObservableObject
         // Call api to get the id of the city
         int cityId = await BuyManager.GetCityIdByName(CityName);
 
-        // Gets alle the products from the API
+        // Gets all the products from the API
         var product = await BuyManager.GetAllByCityId(cityId);
+
+        // Gets all the products from the API
+        var shipProducts = await BuyManager.GetAllByShipId(shipId);
 
         // Creates a new collection in the observed collection
         ProductsCollection = new ObservableCollection<CityProduct>();
@@ -65,9 +67,42 @@ public partial class BuyPageViewModel : ObservableObject
             // Sets the product name
             prod.Product = prodType.Name;
 
+            foreach (ShipProduct shipProduct in shipProducts)
+            {
+                prod.ShipProductAmount = 0;
+                if (shipProduct.ProductTypeID == prod.ProductID)
+                {
+                    prod.ShipProductAmount = shipProduct.Amount;
+                }
+            }
+
             // Adds the product to the collection
             ProductsCollection.Add(prod);
         }
+    }
+
+    [RelayCommand]
+    public async void Buy(int cityProductId)
+    {
+        int shipId = 3;
+
+        // Get the product from the api
+        CityProduct product = productsCollection[cityProductId];
+
+        // Get the ship from the api
+        Ship ship = await BuyManager.GetShipById(shipId);
+
+        int Coins = ship.Coin - product.BuyPrice;
+
+        var newShip = new Ship
+        {
+            Id = shipId,
+            Name = ship.Name,
+            Coin = Coins,
+            SaveId = ship.SaveId
+        };
+
+        await BuyManager.PutShip(newShip);
     }
 
 }

@@ -66,7 +66,10 @@ namespace Hanseatic.Managers
             // Awaits a return from the get request
             HttpResponseMessage response = await client.PutAsJsonAsync($"{Url}/save/", save);
 
+            // Converts the response to json
             var json = await response.Content.ReadAsStringAsync();
+
+            // Deserializes the json to Save object
             return JsonConvert.DeserializeObject<Save>(json);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Hanseatic.Models;
 using Newtonsoft.Json;
+using System.Net.Http.Json;
 using System.Text;
 
 namespace Hanseatic.Managers
@@ -65,6 +66,25 @@ namespace Hanseatic.Managers
             string result = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<Ship>(result); ;
+        }
+
+        /// <summary>
+        /// Gets the Ship by its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<Ship> GetShip(int id)
+        {
+
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new Ship();
+
+            // Gets the http client used for request
+            HttpClient client = await GetClient();
+
+            // Awaits a return from the get request
+            return await client.GetFromJsonAsync<Ship>($"{Url}/ship/{id}");
         }
     }
 }

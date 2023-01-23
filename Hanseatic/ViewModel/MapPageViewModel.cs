@@ -64,8 +64,24 @@ namespace Hanseatic.ViewModel
         public async void EnterCity(string city_name)
         {
             await IncreaseDate();
+            var parameter = new Dictionary<string, object>
+            {
+                {
+                    "city_name", city_name
+                },
+                {
+                    "ship", Ship
+                }
+
+            };
             // Go To buypage
-            await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={city_name}");
+            await Shell.Current.GoToAsync($"{nameof(BuyPage)}", parameter);
+        }
+
+        [RelayCommand]
+        public async Task GetShip()
+        {
+            await ShipManager.GetShip(Ship.Id);
         }
     }
 }

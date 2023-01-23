@@ -6,10 +6,16 @@
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
              x:DataType="viewmodel:MapPageViewModel"
              Title="Map">
+    <!-- Gets the ship when navigatd to -->
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                    EventName="NavigatedTo"
+                    Command="{Binding GetShipCommand}"/>
+    </ContentPage.Behaviors>
     
     <ScrollView Orientation="Vertical">
         <ScrollView Orientation="Horizontal">
-
+            
             <AbsoluteLayout>
                 <Image
                     Source="map.png"

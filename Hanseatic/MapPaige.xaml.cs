@@ -9,17 +9,5 @@ public partial class MapPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
-
-    private async void RadioButton_EnterCity(object sender, CheckedChangedEventArgs e)
-    {
-        if (sender is RadioButton radioButton)
-        {
-            if (e.Value)
-            {
-                // Go To buypage, and send the name of the city with it
-                await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={radioButton.Content}");
-            }
-        }
-    }
 }
 

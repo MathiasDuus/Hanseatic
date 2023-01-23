@@ -21,7 +21,6 @@
                     
                 <!-- All the cities -->
                 <RadioButton TextColor="White" TranslationX="47" TranslationY="394" Content="Edinburgh">
-                    <!--
                     <RadioButton.Behaviors>
                         <toolkit:EventToCommandBehavior
                             x:DataType="{x:Type RadioButton}"
@@ -29,7 +28,6 @@
                             Command="{Binding Source={RelativeSource  AncestorType={x:Type viewmodel:MapPageViewModel}}, Path=EnterCityCommand}"
                             CommandParameter="{Binding}"/>
                     </RadioButton.Behaviors>
-                    -->
 
                 </RadioButton>
                 <RadioButton TextColor="White" TranslationX="111" TranslationY="566" Content="Newcastle" CheckedChanged="RadioButton_EnterCity"/>

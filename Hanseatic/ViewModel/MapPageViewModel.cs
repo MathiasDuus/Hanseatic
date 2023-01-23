@@ -50,18 +50,13 @@ namespace Hanseatic.ViewModel
         /// <summary>
         /// Goes to the city
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="city_name"></param>
         [RelayCommand]
-        public async void EnterCity(object sender)
+        public async void EnterCity(string city_name)
         {
-            if (sender is RadioButton radioButton)
-            {
-                if (radioButton.IsChecked)
-                {
-                    // Go To buypage
-                    await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={radioButton.Content}");
-                }
-            }
+            IncreaseDate();
+            // Go To buypage
+            await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={city_name}");
         }
     }
 }

@@ -18,43 +18,104 @@
                 <!-- Coin and date -->
                 <Label TranslationX="1030" TranslationY="50" FontAttributes="Bold" Text="Coins: "/>
                 <Label TranslationX="1150" TranslationY="50" FontAttributes="Bold" Text="{Binding Date}"/>
-                    
-                <!-- All the cities -->
-                <RadioButton TextColor="White" TranslationX="47" TranslationY="394" Content="Edinburgh">
-                    <!--
-                    <RadioButton.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            x:DataType="{x:Type RadioButton}"
-                            EventName="CheckedChanged"
-                            Command="{Binding Source={RelativeSource  AncestorType={x:Type viewmodel:MapPageViewModel}}, Path=EnterCityCommand}"
-                            CommandParameter="{Binding}"/>
-                    </RadioButton.Behaviors>
-                    -->
 
-                </RadioButton>
-                <RadioButton TextColor="White" TranslationX="111" TranslationY="566" Content="Newcastle" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="81" TranslationY="790" Content="London" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="203" TranslationY="879" Content="Antwerpen" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="335" TranslationY="939" Content="Brussels" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="337" TranslationY="760" Content="Amsterdam" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="418" TranslationY="787" Content="Bremen" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="466" TranslationY="760" Content="Hamburg" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="507" TranslationY="735" Content="Lubeck" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="408" TranslationY="586" Content="Esbjerg" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="469" TranslationY="442" Content="Frederikshavn" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="361" TranslationY="52" Content="Bergen" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="526" TranslationY="195" Content="Oslo" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="615" TranslationY="570" Content="Malmø" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="557" TranslationY="722" Content="Rostock" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="649" TranslationY="761" Content="Stettin" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="804" TranslationY="698" Content="Gdansk" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="808" TranslationY="799" Content="Bydgoszcz" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="792" TranslationY="377" Content="Visby" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="803" TranslationY="237" Content="Stockholm" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="985" TranslationY="440" Content="Riga" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="967" TranslationY="237" Content="Tallinn" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="1151" TranslationY="114" Content="Sankt Petersborg" CheckedChanged="RadioButton_EnterCity"/>
-                <RadioButton TextColor="White" TranslationX="1207" TranslationY="235" Content="Velikij" CheckedChanged="RadioButton_EnterCity"/>    
+                <!-- All the cities -->
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Edinburgh"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="56" TranslationY="409"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Newcastle"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="118" TranslationY="579"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="London"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="88" TranslationY="803"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Antwerpen"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="210" TranslationY="892"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Brussels"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="342" TranslationY="952"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Amsterdam"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="344" TranslationY="773"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Bremen"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="425" TranslationY="800"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Hamburg"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="473" TranslationY="773"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Lubeck"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="514" TranslationY="748"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Esbjerg"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="415" TranslationY="599"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Frederikshavn"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="476" TranslationY="455"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Bergen"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="368" TranslationY="65"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Oslo"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="533" TranslationY="208"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Malmø"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="622" TranslationY="583"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Rostock"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="564" TranslationY="735"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Stettin"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="656" TranslationY="774"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Gdansk"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="811" TranslationY="711"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Bydgoszcz"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="815" TranslationY="812"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Visby"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="799" TranslationY="390"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Stockholm"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="810" TranslationY="250"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Riga"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="992" TranslationY="453"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Tallinn"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="974" TranslationY="250"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Sankt Petersborg"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="1158" TranslationY="127"/>
+                <Button 
+                    Command="{Binding EnterCityCommand}"
+                    CommandParameter="Velikij"
+                    WidthRequest="15" HeightRequest="15" BackgroundColor="Blue" TranslationX="1214" TranslationY="248"/>
 
             </AbsoluteLayout>
 

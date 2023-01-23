@@ -1,4 +1,5 @@
 ﻿using Hanseatic.Models;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
 
 namespace Hanseatic.Managers
@@ -52,9 +53,21 @@ namespace Hanseatic.Managers
             return await client.GetFromJsonAsync<Save>($"{Url}/save/{id}");
         }
 
-        public static async Task UpdateDate(Save save)
+        public static async Task<Save> UpdateDate(Save save)
         {
-            throw new NotImplementedException();
+
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new Save();
+
+            // Gets the http client used for request
+            HttpClient client = await GetClient();
+
+            // Awaits a return from the get request
+            HttpResponseMessage response = await client.PutAsJsonAsync($"{Url}/save/", save);
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Save>(json);
         }
 
         public static async Task Delete(string saveID)

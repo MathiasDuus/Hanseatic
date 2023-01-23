@@ -40,9 +40,11 @@ namespace Hanseatic.ViewModel
         /// <summary>
         /// Increases the date
         /// </summary>
-        public void IncreaseDate()
+        public async Task IncreaseDate()
         {
-            CurrentGame.Date.AddMonths(1);
+            CurrentGame.Date = CurrentGame.Date.AddMonths(1);
+
+            CurrentGame = await MapManager.UpdateDate(CurrentGame);
 
             Date = CurrentGame.Date.ToString("yyyy MMM");
         }
@@ -54,7 +56,7 @@ namespace Hanseatic.ViewModel
         [RelayCommand]
         public async void EnterCity(string city_name)
         {
-            IncreaseDate();
+            await IncreaseDate();
             // Go To buypage
             await Shell.Current.GoToAsync($"{nameof(BuyPage)}?city_name={city_name}");
         }

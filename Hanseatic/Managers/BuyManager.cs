@@ -117,5 +117,18 @@ namespace Hanseatic.Managers
             // Returns the product
             return await client.GetFromJsonAsync<Product>($"{Url}/product_type/{id}");
         }
+
+        public static async Task<IEnumerable<CityProduct>> GetAllByShipId(int id)
+        {
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new List<CityProduct>();
+
+            // Gets the client used to make http requests
+            HttpClient client = await GetClient();
+
+            // Returns a list of products in the city
+            return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/ship_product/GetByShipId/{id}");
+        }
     }
 }

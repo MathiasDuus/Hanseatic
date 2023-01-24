@@ -135,7 +135,7 @@ namespace HanseaticAPI.Controllers
             cityProduct.BasePrice = request.BasePrice;
             cityProduct.MaxAmountFluctation = request.MaxAmountFluctation;
             cityProduct.MinAmountFluctation = request.MinAmountFluctation;
-            cityProduct.Save = request.Save;
+            cityProduct.SaveId = request.SaveId;
 
             // Save changes
             await _context.SaveChangesAsync();

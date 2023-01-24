@@ -47,21 +47,6 @@ namespace Hanseatic.Managers
             return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product");
         }
 
-        public static async Task<CityProduct> Add(string cityProductName, string supplier, string cityProductType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static async Task Update(CityProduct cityProduct)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static async Task Delete(string cityProductID)
-        {
-            throw new NotImplementedException();
-        }
-
         public static async Task<Ship> PutShip(Ship ship)
         {
             // Check for internet, might have to disable, bc emulator
@@ -204,6 +189,30 @@ namespace Hanseatic.Managers
 
             // Returns a list of products in the ship
             return await client.GetFromJsonAsync<IEnumerable<ShipProduct>>($"{Url}/ship_product/GetByShipId/{id}");
+        }
+
+
+
+        /// <summary>
+        /// Gets a single product on the ship
+        /// </summary>
+        /// <param name="shipId"></param>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public static async Task<ShipProduct> GetByShipAndProductId(int shipId, int productId)
+        {
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new ShipProduct();
+
+            // Gets the client used to make http requests
+            HttpClient client = await GetClient();
+
+            // Returns a list of products in the city
+            var response = await client.GetFromJsonAsync<ShipProduct>($"{Url}/ship_product/GetByShipAndProductId/{shipId}/{productId}");
+
+
+            return response;
         }
     }
 }

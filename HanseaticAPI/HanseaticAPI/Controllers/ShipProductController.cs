@@ -134,5 +134,18 @@ namespace HanseaticAPI.Controllers
             // Return all ship products where ship id is input id
             return Ok(await _context.ShipProducts.Where(c => c.ShipId == id).ToListAsync());
         }
+
+        /// <summary>
+        /// Gets a single ship product based on ship id and product id
+        /// </summary>
+        /// <param name="shipId"></param>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        [HttpGet("GetByShipAndProductId/{shipId}/{productId}")]
+        public async Task<ActionResult<List<ShipProduct>>> GetByShipAndProductId(int shipId, int productId)
+        {
+            // Return all ship products where ship id is input id
+            return Ok(await _context.ShipProducts.Where(c => c.ShipId == shipId && c.ProductTypeId == productId).FirstAsync());
+        }
     }
 }

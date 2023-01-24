@@ -113,16 +113,10 @@ public partial class BuyPageViewModel : ObservableObject
         await BuyManager.PutCityProduct(cityProduct);
 
         // get all ship products
-        IEnumerable<ShipProduct> shipProducts = await BuyManager.GetAllByShipId(Ship.Id);
+        ShipProduct shipProduct = await BuyManager.GetByShipAndProductId(Ship.Id, cityProduct.ProductID);
 
-        // Create new ship product
-        ShipProduct shipProduct = new()
-        {
-            Id = shipProducts.Single(i => i.ProductTypeId == cityProduct.ProductID).Id,
-            ShipId = Ship.Id,
-            ProductTypeId = cityProduct.ProductID,
-            Amount = cityProduct.ShipProductAmount
-        };
+        // Updates the amount in ship product
+        shipProduct.Amount = cityProduct.ShipProductAmount;
 
         // Update Ship Product
         await BuyManager.PutShipProduct(shipProduct);

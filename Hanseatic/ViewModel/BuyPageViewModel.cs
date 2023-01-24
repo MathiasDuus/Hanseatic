@@ -103,6 +103,18 @@ public partial class BuyPageViewModel : ObservableObject
         // Add product to ship product
         cityProduct.ShipProductAmount += 1;
 
+        // Calculates the price at which it should be sold
+        cityProduct.SellPrice = -30 * (2 * (cityProduct.ActualAmount / cityProduct.DesiredAmount) - 1) ^ 3 + cityProduct.BasePrice;
+
+        // If the sell price is below 0, it should just be 0
+        if (cityProduct.SellPrice < 0)
+        {
+            cityProduct.SellPrice = 0;
+        }
+
+        // The price which the player pays to get a product
+        cityProduct.BuyPrice = cityProduct.SellPrice + 3;
+
         // Update product collection
         ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
 
@@ -136,14 +148,26 @@ public partial class BuyPageViewModel : ObservableObject
         // Substract price from coins
         Ship.Coin += cityProduct.SellPrice;
 
-        // Update product collection
-        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
-
         // Increase amount in city product
         cityProduct.ActualAmount += 1;
 
         // Substract in ship product
         cityProduct.ShipProductAmount -= 1;
+
+        // Calculates the price at which it should be sold
+        cityProduct.SellPrice = -30 * (2 * (cityProduct.ActualAmount / cityProduct.DesiredAmount) - 1) ^ 3 + cityProduct.BasePrice;
+
+        // If the sell price is below 0, it should just be 0
+        if (cityProduct.SellPrice < 0)
+        {
+            cityProduct.SellPrice = 0;
+        }
+
+        // The price which the player pays to get a product
+        cityProduct.BuyPrice = cityProduct.SellPrice + 3;
+
+        // Update product collection
+        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
 
         // get all ship products
         ShipProduct shipProduct = await BuyManager.GetByShipAndProductId(Ship.Id, cityProduct.ProductID);

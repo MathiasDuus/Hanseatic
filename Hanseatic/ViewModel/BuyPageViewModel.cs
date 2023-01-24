@@ -57,7 +57,7 @@ public partial class BuyPageViewModel : ObservableObject
             Product prodType = await BuyManager.GetProductById(prod.ProductID);
 
             // Calculates the price at which it should be sold
-            prod.SellPrice = -30 * (2 * (prod.ActualAmount / prod.DesiredAmount) - 1) ^ 3 + prod.BasePrice;
+            prod.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(prod.ActualAmount) / Convert.ToDouble(prod.DesiredAmount)) - 1, 3) * (-30) + prod.BasePrice);
 
             // If the sell price is below 0, it should just be 0
             if (prod.SellPrice < 0)
@@ -104,7 +104,7 @@ public partial class BuyPageViewModel : ObservableObject
         cityProduct.ShipProductAmount += 1;
 
         // Calculates the price at which it should be sold
-        cityProduct.SellPrice = -30 * (2 * (cityProduct.ActualAmount / cityProduct.DesiredAmount) - 1) ^ 3 + cityProduct.BasePrice;
+        cityProduct.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(cityProduct.ActualAmount) / Convert.ToDouble(cityProduct.DesiredAmount)) - 1, 3) * (-30) + cityProduct.BasePrice);
 
         // If the sell price is below 0, it should just be 0
         if (cityProduct.SellPrice < 0)
@@ -155,7 +155,7 @@ public partial class BuyPageViewModel : ObservableObject
         cityProduct.ShipProductAmount -= 1;
 
         // Calculates the price at which it should be sold
-        cityProduct.SellPrice = -30 * (2 * (cityProduct.ActualAmount / cityProduct.DesiredAmount) - 1) ^ 3 + cityProduct.BasePrice;
+        cityProduct.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(cityProduct.ActualAmount) / Convert.ToDouble(cityProduct.DesiredAmount)) - 1, 3) * (-30) + cityProduct.BasePrice);
 
         // If the sell price is below 0, it should just be 0
         if (cityProduct.SellPrice < 0)

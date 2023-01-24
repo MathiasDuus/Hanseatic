@@ -117,7 +117,7 @@
                                 Grid.Row="0"
                                 Grid.Column="2"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BuyPageViewModel}},Path=BuyCommand }"
-                                CommandParameter="{Binding Id}"
+                                CommandParameter="{Binding .}"
                                 Text="{Binding BuyPrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
@@ -126,6 +126,8 @@
                                 Style="{StaticResource Sell}"
                                 Grid.Row="0"
                                 Grid.Column="3"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BuyPageViewModel}},Path=SellCommand }"
+                                CommandParameter="{Binding .}"
                                 Text="{Binding SellPrice}"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"/>
@@ -161,7 +163,7 @@
                 Style="{StaticResource coins}"
                 Grid.Row="1"
                 Grid.Column="0"
-                Text="500"
+                Text="{Binding Ship.Coin}"
                 VerticalOptions="Center"
                 HorizontalOptions="End"/>
 

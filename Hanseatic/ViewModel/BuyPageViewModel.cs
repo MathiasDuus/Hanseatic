@@ -36,7 +36,7 @@ public partial class BuyPageViewModel : ObservableObject
         int shipId = 1;
 
         // Used to endure that "CityName" is set
-        await Task.Delay(200);
+        await Task.Delay(50);
 
         // Call api to get the id of the city
         int cityId = await BuyManager.GetCityIdByName(CityName);

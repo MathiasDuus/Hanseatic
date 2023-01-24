@@ -94,6 +94,22 @@ namespace Hanseatic.Managers
             return JsonConvert.DeserializeObject<CityProduct>(json);
         }
 
+        public static async Task<ShipProduct> PutShipProduct(ShipProduct shipProduct)
+        {
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new ShipProduct();
+
+            // Gets the client used to make http requests
+            HttpClient client = await GetClient();
+
+            // Returns a list of products in the city
+            var response = await client.PutAsJsonAsync<ShipProduct>($"{Url}/ship_product/", shipProduct);
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<ShipProduct>(json);
+        }
+
         /// <summary>
         /// Gets the city ID via the name of the city
         /// </summary>

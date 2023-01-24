@@ -16,9 +16,5 @@
         public int SellPrice { get; set; }
         public int ShipProductAmount { get; set; }
 
-        public static implicit operator CityProduct(CityProductAPI v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

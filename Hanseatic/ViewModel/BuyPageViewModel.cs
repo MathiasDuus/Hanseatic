@@ -97,42 +97,42 @@ public partial class BuyPageViewModel : ObservableObject
         // Substract price from coins
         Ship.Coin -= cityProduct.BuyPrice;
 
-        // Update ship
-        Ship = await BuyManager.PutShip(Ship);
-
         // Substract amount from city product
         cityProduct.ActualAmount -= 1;
 
+        // Add product to ship product
+        cityProduct.ShipProductAmount += 1;
 
-        var lil = new CityProduct
-        {
-            Id = cityProduct.Id,
-            CityId = cityProduct.CityId,
-            SaveId = cityProduct.SaveId,
-            ProductID = cityProduct.ProductID,
-            DesiredAmount = cityProduct.DesiredAmount,
-            ActualAmount = cityProduct.ActualAmount,
-            BasePrice = cityProduct.BasePrice,
-            MinAmountFluctation = cityProduct.MinAmountFluctation,
-            MaxAmountFluctation = cityProduct.MaxAmountFluctation
-        };
+        // Update product collection
+        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
+
+        // Update ship
+        Ship = await BuyManager.PutShip(Ship);
 
         //Update city product
-        cityProduct = await BuyManager.PutCityProduct(lil);
-        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
+        await BuyManager.PutCityProduct(cityProduct);
+
+        // get all ship products
+        IEnumerable<ShipProduct> shipProducts = await BuyManager.GetAllByShipId(Ship.Id);
+
+        // Create new ship product
+        ShipProduct shipProduct = new()
+        {
+            Id = shipProducts.Single(i => i.ShipId == Ship.Id).Id,
+            ShipId = Ship.Id,
+            ProductTypeID = cityProduct.ProductID,
+            Amount = cityProduct.ShipProductAmount
+        };
+
+        // Update Ship Product
+        await BuyManager.PutShipProduct(shipProduct);
+
 
     }
 
     [RelayCommand]
     public async void Sell(CityProduct cityProduct)
     {
-        // Get the city product from the api
-        // CityProduct cityProductAPI = await BuyManager.GetCityProductById(cityProduct.Id);
-
-        // Get the city from product collection
-        // CityProduct cityProductAPI = productsCollection[cityProduct.Id];
-        CityProduct cityProductAPI = (CityProduct)productsCollection.Single(i => i.Id == cityProduct.Id);
-
         // Check if ship has enough product to sell
         if (cityProduct.ShipProductAmount == 0)
         {
@@ -142,27 +142,32 @@ public partial class BuyPageViewModel : ObservableObject
         // Substract price from coins
         Ship.Coin += cityProduct.SellPrice;
 
+        // Update product collection
+        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
+
+        // Increase amount in city product
+        cityProduct.ActualAmount += 1;
+
+        // get all ship products
+        IEnumerable<ShipProduct> shipProducts = await BuyManager.GetAllByShipId(Ship.Id);
+
+        // Create new ship product
+        ShipProduct shipProduct = new()
+        {
+            Id = shipProducts.Single(i => i.ShipId == Ship.Id).Id,
+            ShipId = Ship.Id,
+            ProductTypeID = cityProduct.ProductID,
+            Amount = cityProduct.ShipProductAmount
+        };
+
+        // Update Ship Product
+        await BuyManager.PutShipProduct(shipProduct);
+
         // Update ship
         Ship = await BuyManager.PutShip(Ship);
 
-        // Increase amount in city product
-        cityProductAPI.ActualAmount += 1;
-
-        var lil = new CityProductAPI
-        {
-            Id = cityProductAPI.Id,
-            CityId = cityProductAPI.CityId,
-            SaveId = cityProductAPI.SaveId,
-            ProductId = cityProductAPI.ProductID,
-            DesiredAmount = cityProductAPI.DesiredAmount,
-            ActualAmount = cityProductAPI.ActualAmount,
-            BasePrice = cityProductAPI.BasePrice,
-            MinAmountFluctation = cityProductAPI.MinAmountFluctation,
-            MaxAmountFluctation = cityProductAPI.MaxAmountFluctation
-        };
-
         //Update city product
-        await BuyManager.PutCityProduct(lil);
+        await BuyManager.PutCityProduct(cityProduct);
     }
 
 }

@@ -74,7 +74,7 @@ public partial class BuyPageViewModel : ObservableObject
             foreach (ShipProduct shipProduct in shipProducts)
             {
                 prod.ShipProductAmount = 0;
-                if (shipProduct.ProductTypeID == prod.ProductID)
+                if (shipProduct.ProductTypeId == prod.ProductID)
                 {
                     prod.ShipProductAmount = shipProduct.Amount;
                 }

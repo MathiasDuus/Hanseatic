@@ -148,6 +148,9 @@ public partial class BuyPageViewModel : ObservableObject
         // Increase amount in city product
         cityProduct.ActualAmount += 1;
 
+        // Substract in ship product
+        cityProduct.ShipProductAmount -= 1;
+
         // get all ship products
         IEnumerable<ShipProduct> shipProducts = await BuyManager.GetAllByShipId(Ship.Id);
 

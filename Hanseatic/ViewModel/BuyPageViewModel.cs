@@ -88,10 +88,6 @@ public partial class BuyPageViewModel : ObservableObject
     [RelayCommand]
     public async void Buy(CityProduct cityProduct)
     {
-        // Get the city from product collection
-        CityProduct cityProductCollection = (CityProduct)ProductsCollection.Single(i => i.Id == cityProduct.Id);
-
-
         // Check if ship has enough coin to buy
         if (Ship.Coin < cityProduct.BuyPrice)
         {
@@ -105,17 +101,15 @@ public partial class BuyPageViewModel : ObservableObject
         Ship = await BuyManager.PutShip(Ship);
 
         // Substract amount from city product
-        // cityProduct.ActualAmount -= 1;
+        cityProduct.ActualAmount -= 1;
 
-        // Substract amount from city product collection
-        cityProductCollection.ActualAmount -= 1;
 
-        var lil = new CityProductAPI
+        var lil = new CityProduct
         {
             Id = cityProduct.Id,
             CityId = cityProduct.CityId,
             SaveId = cityProduct.SaveId,
-            ProductId = cityProduct.ProductID,
+            ProductID = cityProduct.ProductID,
             DesiredAmount = cityProduct.DesiredAmount,
             ActualAmount = cityProduct.ActualAmount,
             BasePrice = cityProduct.BasePrice,
@@ -124,9 +118,9 @@ public partial class BuyPageViewModel : ObservableObject
         };
 
         //Update city product
-        await BuyManager.PutCityProduct(lil);
+        cityProduct = await BuyManager.PutCityProduct(lil);
+        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
 
-        // ProductsCollection.Single(i => i.Id == cityProduct.Id).ActualAmount = cityProduct.ActualAmount;
     }
 
     [RelayCommand]

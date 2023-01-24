@@ -157,15 +157,16 @@
                 Grid.Column="0"
                 Text="Coins:"
                 VerticalOptions="Center"
-                HorizontalOptions="Start"/>
+                HorizontalOptions="Center"/>
 
             <Label 
                 Style="{StaticResource coins}"
                 Grid.Row="1"
-                Grid.Column="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="5"
                 Text="{Binding Ship.Coin}"
                 VerticalOptions="Center"
-                HorizontalOptions="End"/>
+                HorizontalOptions="Start"/>
 
         </Grid>
     </Grid>

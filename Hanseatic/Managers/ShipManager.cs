@@ -69,6 +69,70 @@ namespace Hanseatic.Managers
         }
 
         /// <summary>
+        /// Send a POST request to create all products for the ship with 0 in the amount
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public static async Task<List<ShipProduct>> PostShipProduct(int id)
+        {
+            var products = await GetAllProducts();
+            // Gets the client
+            HttpClient client = await GetClient();
+
+            // Creates the ship
+            List<ShipProduct> shipProducts = new();
+
+            foreach (Product product in products)
+            {
+                // Converts the ship to a json string
+                string ShipJson = JsonConvert.SerializeObject(new ShipProduct
+                {
+                    ProductTypeId = product.Id,
+                    ShipId = id,
+                    Amount = 0
+                });
+
+                // Creates the body to be sent
+                StringContent data = new(ShipJson, Encoding.UTF8, "application/json");
+
+                // The response from the API
+                HttpResponseMessage response = await client.PostAsync($"{Url}/ship_product", data);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+
+                    shipProducts.Add(JsonConvert.DeserializeObject<ShipProduct>(result));
+                }
+                else
+                {
+                    return new List<ShipProduct>();
+                }
+            }
+
+            return shipProducts;
+        }
+
+        /// <summary>
+        /// Gets all products
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<IEnumerable<Product>> GetAllProducts()
+        {
+
+            // Check for internet, might have to disable, bc emulator
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return new List<Product>();
+
+            // Gets the http client used for request
+            HttpClient client = await GetClient();
+
+            // Awaits a return from the get request
+            return await client.GetFromJsonAsync<IEnumerable<Product>>($"{Url}/product_type");
+        }
+
+        /// <summary>
         /// Gets the Ship by its ID
         /// </summary>
         /// <param name="id"></param>

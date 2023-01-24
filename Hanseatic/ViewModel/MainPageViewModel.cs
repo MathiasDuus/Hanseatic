@@ -29,6 +29,8 @@ namespace Hanseatic.ViewModel
 
             Ship postShip = await ShipManager.Post(Text);
 
+            List<ShipProduct> shipProduct = await ShipManager.PostShipProduct(postShip.Id);
+
             var ship = new Dictionary<string, object>
             {
                 {"ship", postShip }

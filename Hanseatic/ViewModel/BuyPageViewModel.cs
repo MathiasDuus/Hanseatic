@@ -118,9 +118,9 @@ public partial class BuyPageViewModel : ObservableObject
         // Create new ship product
         ShipProduct shipProduct = new()
         {
-            Id = shipProducts.Single(i => i.ShipId == Ship.Id).Id,
+            Id = shipProducts.Single(i => i.ProductTypeId == cityProduct.ProductID).Id,
             ShipId = Ship.Id,
-            ProductTypeID = cityProduct.ProductID,
+            ProductTypeId = cityProduct.ProductID,
             Amount = cityProduct.ShipProductAmount
         };
 
@@ -157,9 +157,9 @@ public partial class BuyPageViewModel : ObservableObject
         // Create new ship product
         ShipProduct shipProduct = new()
         {
-            Id = shipProducts.Single(i => i.ShipId == Ship.Id).Id,
+            Id = shipProducts.Single(i => i.ProductTypeId == cityProduct.ProductID).Id,
             ShipId = Ship.Id,
-            ProductTypeID = cityProduct.ProductID,
+            ProductTypeId = cityProduct.ProductID,
             Amount = cityProduct.ShipProductAmount
         };
 

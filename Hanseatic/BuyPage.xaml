@@ -2,10 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Hanseatic.BuyPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:data="clr-namespace:Hanseatic.Models"
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
              x:DataType="viewmodel:BuyPageViewModel"
              Title="{Binding CityName}">
+
+    <!-- When navigatedd to fluntuate the amount of product -->
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            EventName="NavigatedTo"
+            Command="{Binding LoadProductsCommand}"/>
+        <toolkit:EventToCommandBehavior
+            EventName="NavigatedFrom"
+            Command="{Binding ClearProductsCommand}"/>
+    </ContentPage.Behaviors>
 
 
     <Grid  

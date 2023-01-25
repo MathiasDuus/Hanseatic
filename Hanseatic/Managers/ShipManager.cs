@@ -1,5 +1,6 @@
 ﻿using Hanseatic.Models;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text;
 
@@ -75,6 +76,7 @@ namespace Hanseatic.Managers
         /// <returns></returns>
         public static async Task<List<ShipProduct>> PostShipProduct(int id)
         {
+
             var products = await GetAllProducts();
             // Gets the client
             HttpClient client = await GetClient();
@@ -82,33 +84,83 @@ namespace Hanseatic.Managers
             // Creates the ship
             List<ShipProduct> shipProducts = new();
 
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             foreach (Product product in products)
             {
-                // Converts the ship to a json string
-                string ShipJson = JsonConvert.SerializeObject(new ShipProduct
+                shipProducts.Add(new ShipProduct
                 {
                     ProductTypeId = product.Id,
                     ShipId = id,
                     Amount = 0
                 });
+                //stopWatch.Start();
+                // Converts the ship to a json string
+                //string ShipJson = JsonConvert.SerializeObject(new ShipProduct
+                //{
+                //    ProductTypeId = product.Id,
+                //    ShipId = id,
+                //    Amount = 0
+                //});
 
-                // Creates the body to be sent
-                StringContent data = new(ShipJson, Encoding.UTF8, "application/json");
+                //// Creates the body to be sent
+                //StringContent data = new(ShipJson, Encoding.UTF8, "application/json");
 
-                // The response from the API
-                HttpResponseMessage response = await client.PostAsync($"{Url}/ship_product", data);
+                //// The response from the API
+                //HttpResponseMessage response = await client.PostAsync($"{Url}/ship_product", data);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string result = await response.Content.ReadAsStringAsync();
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    string result = await response.Content.ReadAsStringAsync();
 
-                    shipProducts.Add(JsonConvert.DeserializeObject<ShipProduct>(result));
-                }
-                else
-                {
-                    return new List<ShipProduct>();
-                }
+                //    shipProducts.Add(JsonConvert.DeserializeObject<ShipProduct>(result));
+                //}
+                //else
+                //{
+                //    return new List<ShipProduct>();
+                //}
+
+                //stopWatch.Stop();
+                //// Get the elapsed time as a TimeSpan value.
+                //TimeSpan ts = stopWatch.Elapsed;
+
+                //// Format and display the TimeSpan value.
+                //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                //     ts.Hours, ts.Minutes, ts.Seconds,
+                //     ts.Milliseconds / 10);
+                //Console.WriteLine("RunTime " + elapsedTime);
             }
+            //ship_product_list
+            // Converts the ship to a json string
+            string ShipJson = JsonConvert.SerializeObject(shipProducts);
+
+            // Creates the body to be sent
+            StringContent data = new(ShipJson, Encoding.UTF8, "application/json");
+
+            // The response from the API
+            HttpResponseMessage response = await client.PostAsync($"{Url}/ship_product/ship_product_list", data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string result = await response.Content.ReadAsStringAsync();
+
+                shipProducts.Add(JsonConvert.DeserializeObject<ShipProduct>(result));
+            }
+            else
+            {
+                return new List<ShipProduct>();
+            }
+
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                 ts.Hours, ts.Minutes, ts.Seconds,
+                 ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
 
             return shipProducts;
         }

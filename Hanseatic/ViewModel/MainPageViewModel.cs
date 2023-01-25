@@ -22,11 +22,6 @@ namespace Hanseatic.ViewModel
             if (string.IsNullOrWhiteSpace(Text))
                 return;
 
-            _ = new Ship
-            {
-                Name = Text
-            };
-
             Ship postShip = await ShipManager.Post(Text);
 
             List<ShipProduct> shipProduct = await ShipManager.PostShipProduct(postShip.Id);

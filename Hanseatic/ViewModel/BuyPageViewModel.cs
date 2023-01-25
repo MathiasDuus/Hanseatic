@@ -41,9 +41,12 @@ public partial class BuyPageViewModel : ObservableObject
         // Add product to ship product
         cityProduct.ShipProductAmount += 1;
 
-        // Calculates the price at which it should be sold
-        cityProduct.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(cityProduct.ActualAmount) / Convert.ToDouble(cityProduct.DesiredAmount)) - 1, 3) * (-30) + cityProduct.BasePrice);
 
+        // Calculates the price at which it should be sold
+
+        cityProduct.SellPrice = UpdateSellPrice(cityProduct);
+
+        // Calculates the price at which it should be sold
         // If the sell price is below 0, it should just be 0
         if (cityProduct.SellPrice < 0)
         {
@@ -72,26 +75,12 @@ public partial class BuyPageViewModel : ObservableObject
         Ship = await BuyManager.PutShip(Ship);
 
         // Update city product
-        await BuyManager.PutCityProduct(cityProduct);
+        cityProduct = await BuyManager.PutCityProduct(cityProduct);
 
         timer.Stop();
         TimeSpan timeTaken = timer.Elapsed;
         string foo = "Time taken for API calls: " + timeTaken.ToString(@"m\:ss\.fff");
         Console.WriteLine(foo);
-
-        // Update City Product
-        var i = 0;
-        foreach (var product in productsCollection)
-        {
-            if (product.Id == cityProduct.Id)
-            {
-                ProductsCollection[i] = cityProduct;
-                break;
-            }
-            i++;
-        }
-
-        // cityProduct = ProductsCollection.First(i => i.Id == cityProduct.Id);
 
         // Update product collection
         // ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
@@ -116,7 +105,7 @@ public partial class BuyPageViewModel : ObservableObject
         cityProduct.ShipProductAmount -= 1;
 
         // Calculates the price at which it should be sold
-        cityProduct.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(cityProduct.ActualAmount) / Convert.ToDouble(cityProduct.DesiredAmount)) - 1, 3) * (-30) + cityProduct.BasePrice);
+        cityProduct.SellPrice = UpdateSellPrice(cityProduct);
 
         // If the sell price is below 0, it should just be 0
         if (cityProduct.SellPrice < 0)
@@ -174,7 +163,7 @@ public partial class BuyPageViewModel : ObservableObject
             Product prodType = await BuyManager.GetProductById(prod.ProductID);
 
             // Calculates the price at which it should be sold
-            prod.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(prod.ActualAmount) / Convert.ToDouble(prod.DesiredAmount)) - 1, 3) * (-30) + prod.BasePrice);
+            prod.SellPrice = UpdateSellPrice(prod);
 
             // If the sell price is below 0, it should just be 0
             if (prod.SellPrice < 0)
@@ -200,6 +189,22 @@ public partial class BuyPageViewModel : ObservableObject
             // Adds the product to the collection
             ProductsCollection.Add(prod);
         }
+    }
+
+    private int UpdateSellPrice(CityProduct prod)
+    {
+        double firstPart = Math.Pow(2 * (Convert.ToDouble(prod.ActualAmount) / Convert.ToDouble(prod.DesiredAmount)) - 1, 3);
+
+        // Calculates the price at which it should be sold
+        if (firstPart < 2)
+        {
+            prod.SellPrice = Convert.ToInt32(firstPart * (-30) + prod.BasePrice);
+        }
+        else
+        {
+            prod.SellPrice = 0;
+        }
+        return prod.SellPrice;
     }
 
     [RelayCommand]

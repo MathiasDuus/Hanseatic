@@ -158,6 +158,7 @@ namespace HanseaticAPI.Controllers
         public async Task<ActionResult<List<ShipProduct>>> AddAllShipProducts(List<ShipProductDTO> shipProductDTO)
         {
             ShipProduct shipProduct = new();
+            List<ShipProduct> shipProducts = new();
             foreach (ShipProductDTO item in shipProductDTO)
             {
                 // Check if ship exists
@@ -174,10 +175,11 @@ namespace HanseaticAPI.Controllers
                 // Save changes
                 await _context.SaveChangesAsync();
 
+                shipProducts.Add(shipProduct);
             }
 
             // Return ship product
-            return Ok(shipProduct);
+            return Ok(shipProducts);
         }
     }
 }

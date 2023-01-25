@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Hanseatic.Managers;
 using Hanseatic.Models;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Hanseatic.ViewModel;
 
@@ -40,8 +41,18 @@ public partial class BuyPageViewModel : ObservableObject
         // Add product to ship product
         cityProduct.ShipProductAmount += 1;
 
+
         // Calculates the price at which it should be sold
         cityProduct.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(cityProduct.ActualAmount) / Convert.ToDouble(cityProduct.DesiredAmount)) - 1, 3) * (-30) + cityProduct.BasePrice);
+
+        /*
+        var timer = new Stopwatch();
+        timer.Start();
+        timer.Stop();
+        TimeSpan timeTaken = timer.Elapsed;
+        string foo = "Time taken: " + timeTaken.ToString(@"m\:ss\.fff");
+        Console.WriteLine(foo);
+        */
 
         // If the sell price is below 0, it should just be 0
         if (cityProduct.SellPrice < 0)
@@ -52,25 +63,34 @@ public partial class BuyPageViewModel : ObservableObject
         // The price which the player pays to get a product
         cityProduct.BuyPrice = cityProduct.SellPrice + 3;
 
-        // Update product collection
-        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
+        // Updates the amount in ship product
+        ShipProduct shipProduct = new ShipProduct
+        {
+            Id = cityProduct.ShipProductId,
+            ShipId = ship.Id,
+            ProductTypeId = cityProduct.ProductID,
+            Amount = cityProduct.ShipProductAmount
+        };
+
+        var timer = new Stopwatch();
+        timer.Start();
+
+        // Update Ship Product
+        await BuyManager.PutShipProduct(shipProduct);
 
         // Update ship
         Ship = await BuyManager.PutShip(Ship);
 
         // Update city product
-        await BuyManager.PutCityProduct(cityProduct);
+        cityProduct = await BuyManager.PutCityProduct(cityProduct);
 
-        // Get the selected
-        ShipProduct shipProduct = await BuyManager.GetByShipAndProductId(Ship.Id, cityProduct.ProductID);
+        timer.Stop();
+        TimeSpan timeTaken = timer.Elapsed;
+        string foo = "Time taken for API calls: " + timeTaken.ToString(@"m\:ss\.fff");
+        Console.WriteLine(foo);
 
-        // Updates the amount in ship product
-        shipProduct.Amount = cityProduct.ShipProductAmount;
-
-        // Update Ship Product
-        await BuyManager.PutShipProduct(shipProduct);
-
-
+        // Update product collection
+        // ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
     }
 
     [RelayCommand]
@@ -103,23 +123,26 @@ public partial class BuyPageViewModel : ObservableObject
         // The price which the player pays to get a product
         cityProduct.BuyPrice = cityProduct.SellPrice + 3;
 
-        // Update product collection
-        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
-
-        // get all ship products
-        ShipProduct shipProduct = await BuyManager.GetByShipAndProductId(Ship.Id, cityProduct.ProductID);
-
         // Updates the amount in ship product
-        shipProduct.Amount = cityProduct.ShipProductAmount;
+        ShipProduct shipProduct = new ShipProduct
+        {
+            Id = cityProduct.ShipProductId,
+            ShipId = ship.Id,
+            ProductTypeId = cityProduct.ProductID,
+            Amount = cityProduct.ShipProductAmount
+        };
 
         // Update Ship Product
         await BuyManager.PutShipProduct(shipProduct);
 
         // Update ship
-        Ship = await BuyManager.PutShip(Ship);
+        await BuyManager.PutShip(Ship);
 
         //Update city product
         await BuyManager.PutCityProduct(cityProduct);
+
+        // Update product collection
+        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
     }
 
     [RelayCommand]
@@ -166,6 +189,9 @@ public partial class BuyPageViewModel : ObservableObject
 
             // Sets the product amount
             prod.ShipProductAmount = shipProduct.Amount;
+
+            // adds ship product id
+            prod.ShipProductId = shipProduct.Id;
 
             // Adds the product to the collection
             ProductsCollection.Add(prod);

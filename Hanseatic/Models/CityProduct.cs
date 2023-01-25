@@ -15,6 +15,7 @@
         public int BuyPrice { get; set; }
         public int SellPrice { get; set; }
         public int ShipProductAmount { get; set; }
+        public int ShipProductId { get; set; }
 
     }
 }

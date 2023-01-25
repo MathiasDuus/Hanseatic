@@ -59,6 +59,13 @@ namespace HanseaticAPI.Controllers
             if (cityProduct == null)
                 return BadRequest("City Product not found.");
 
+            Random rand = new();
+
+            foreach (CityProduct cp in cityProduct)
+            {
+                cp.ActualAmount = cp.ActualAmount * rand.Next(Convert.ToInt32(cp.MinAmountFluctation * 100), Convert.ToInt32(cp.MaxAmountFluctation * 100)) / 100;
+            }
+
             // Return city product
             return Ok(cityProduct);
         }

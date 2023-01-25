@@ -147,5 +147,37 @@ namespace HanseaticAPI.Controllers
             // Return all ship products where ship id is input id
             return Ok(await _context.ShipProducts.Where(c => c.ShipId == shipId && c.ProductTypeId == productId).FirstAsync());
         }
+
+
+        /// <summary>
+        /// Adds all products to a ship
+        /// </summary>
+        /// <param name="productDTO"></param>
+        /// <returns></returns>
+        [HttpPost("ship_product_list")]
+        public async Task<ActionResult<List<ShipProduct>>> AddAllShipProducts(List<ShipProductDTO> shipProductDTO)
+        {
+            ShipProduct shipProduct = new();
+            foreach (ShipProductDTO item in shipProductDTO)
+            {
+                // Check if ship exists
+                Ship? ship = await _context.Ships.FindAsync(item.ShipId);
+                if (ship == null)
+                    return BadRequest("Ship not found.");
+
+                // Map ship product DTO to ship product
+                shipProduct = _mapper.Map<ShipProduct>(item);
+
+                // Add ship product to ship products
+                _context.ShipProducts.Add(shipProduct);
+
+                // Save changes
+                await _context.SaveChangesAsync();
+
+            }
+
+            // Return ship product
+            return Ok(shipProduct);
+        }
     }
 }

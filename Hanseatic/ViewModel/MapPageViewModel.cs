@@ -81,7 +81,7 @@ namespace Hanseatic.ViewModel
         [RelayCommand]
         public async Task GetShip()
         {
-            await ShipManager.GetShip(Ship.Id);
+            Ship = await ShipManager.GetShip(Ship.Id);
         }
     }
 }

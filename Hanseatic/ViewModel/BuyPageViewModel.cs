@@ -26,6 +26,9 @@ public partial class BuyPageViewModel : ObservableObject
     [RelayCommand]
     public async void Buy(CityProduct cityProduct)
     {
+        // Get index of city product in collection
+        int ix = productsCollection.IndexOf(cityProduct);
+
         // Check if ship has enough coin to buy
         if (Ship.Coin < cityProduct.BuyPrice)
         {
@@ -75,12 +78,18 @@ public partial class BuyPageViewModel : ObservableObject
         Ship = await BuyManager.PutShip(Ship);
 
         // Update city product
-        cityProduct = await BuyManager.PutCityProduct(cityProduct);
+        // cityProduct = 
+        await BuyManager.PutCityProduct(cityProduct);
 
         timer.Stop();
         TimeSpan timeTaken = timer.Elapsed;
         string foo = "Time taken for API calls: " + timeTaken.ToString(@"m\:ss\.fff");
         Console.WriteLine(foo);
+
+        // Update City Product
+        // productsCollection[ix] = cityProduct;
+        // productsCollection.RemoveAt(ix);
+        // productsCollection.Insert(ix, cityProduct);
 
         // Update product collection
         // ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);

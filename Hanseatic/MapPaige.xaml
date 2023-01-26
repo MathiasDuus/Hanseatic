@@ -5,7 +5,9 @@
              x:Class="Hanseatic.MapPage"
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
              x:DataType="viewmodel:MapPageViewModel"
-             Title="Map">
+             NavigationPage.HasNavigationBar="false"
+             Shell.NavBarIsVisible="false"
+             >
     <!-- Gets the ship when navigatd to -->
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior

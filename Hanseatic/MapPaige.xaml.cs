@@ -1,5 +1,4 @@
 ﻿using Hanseatic.ViewModel;
-
 namespace Hanseatic;
 
 public partial class MapPage : ContentPage

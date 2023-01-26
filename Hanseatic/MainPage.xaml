@@ -5,13 +5,15 @@
              xmlns:viewmodel="clr-namespace:Hanseatic.ViewModel"
              x:DataType="viewmodel:MainPageViewModel">
     
-    <Grid RowDefinitions=".25*, .25*, auto, auto, .25*, .25*">
+    <Grid
+        Padding="5"
+        RowDefinitions="0.25*, .25*, auto, auto, .25*, .25*">
 
-        <Image Grid.Row="0" Source="dotnet_bot"/>
+        <Image Grid.Row="0" Grid.RowSpan="2" Margin="100" Source="dotnet_bot" />
         
         <Entry Grid.Row="2" 
                Text="{Binding Text}"
-               Placeholder="Enter name"
+               Placeholder="Enter Ship's Name"
                TextColor="Black" 
                PlaceholderColor="Black"/>
         

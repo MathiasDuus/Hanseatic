@@ -34,22 +34,9 @@ namespace Hanseatic.Managers
             return client;
         }
 
-        public static async Task<IEnumerable<CityProduct>> GetAll()
-        {
-            // Check for internet, might have to disable, bc emulator
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return new List<CityProduct>();
-
-            // Gets the client used to make http requests
-            HttpClient client = await GetClient();
-
-            // Waits for the request to finish
-            return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product");
-        }
-
         public static async Task<Ship> PutShip(Ship ship)
         {
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new Ship();
 
@@ -59,13 +46,16 @@ namespace Hanseatic.Managers
             // Returns a list of products in the city
             var response = await client.PutAsJsonAsync<Ship>($"{Url}/ship/", ship);
 
+            // Converts the HttpContent to JSON
             var json = await response.Content.ReadAsStringAsync();
+
+            // Converts the JSON to Ship
             return JsonConvert.DeserializeObject<Ship>(json);
         }
 
         public static async Task<CityProduct> PutCityProduct(CityProduct cityProduct)
         {
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new CityProduct();
 
@@ -76,12 +66,13 @@ namespace Hanseatic.Managers
             var response = await client.PutAsJsonAsync<CityProduct>($"{Url}/city_product/", cityProduct);
 
             var json = await response.Content.ReadAsStringAsync();
+
             return JsonConvert.DeserializeObject<CityProduct>(json);
         }
 
         public static async Task<ShipProduct> PutShipProduct(ShipProduct shipProduct)
         {
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new ShipProduct();
 
@@ -102,7 +93,7 @@ namespace Hanseatic.Managers
         /// <returns></returns>
         public static async Task<int> GetCityIdByName(string name)
         {
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return -1;
 
@@ -123,7 +114,7 @@ namespace Hanseatic.Managers
         /// <returns></returns>
         public static async Task<IEnumerable<CityProduct>> GetAllByCityId(int id)
         {
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new List<CityProduct>();
 
@@ -134,14 +125,9 @@ namespace Hanseatic.Managers
             return await client.GetFromJsonAsync<IEnumerable<CityProduct>>($"{Url}/city_product/GetByCityId/{id}");
         }
 
-        /// <summary>
-        /// Gets the product via Product ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public static async Task<Product> GetProductById(int id)
         {
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new Product();
 
@@ -150,32 +136,6 @@ namespace Hanseatic.Managers
 
             // Returns the product
             return await client.GetFromJsonAsync<Product>($"{Url}/product_type/{id}");
-        }
-
-        public static async Task<Ship> GetShipById(int id)
-        {
-            // Check for internet, might have to disable, bc emulator
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return new Ship();
-
-            // Gets the client used to make http requests
-            HttpClient client = await GetClient();
-
-            // Returns the product
-            return await client.GetFromJsonAsync<Ship>($"{Url}/ship/{id}");
-        }
-
-        public static async Task<CityProduct> GetCityProductById(int id)
-        {
-            // Check for internet, might have to disable, bc emulator
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return new CityProduct();
-
-            // Gets the client used to make http requests
-            HttpClient client = await GetClient();
-
-            // Returns the product
-            return await client.GetFromJsonAsync<CityProduct>($"{Url}/city_product/{id}");
         }
 
         public static async Task<IEnumerable<ShipProduct>> GetAllByShipId(int id)
@@ -189,30 +149,6 @@ namespace Hanseatic.Managers
 
             // Returns a list of products in the ship
             return await client.GetFromJsonAsync<IEnumerable<ShipProduct>>($"{Url}/ship_product/GetByShipId/{id}");
-        }
-
-
-
-        /// <summary>
-        /// Gets a single product on the ship
-        /// </summary>
-        /// <param name="shipId"></param>
-        /// <param name="productId"></param>
-        /// <returns></returns>
-        public static async Task<ShipProduct> GetByShipAndProductId(int shipId, int productId)
-        {
-            // Check for internet, might have to disable, bc emulator
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return new ShipProduct();
-
-            // Gets the client used to make http requests
-            HttpClient client = await GetClient();
-
-            // Returns a list of products in the city
-            var response = await client.GetFromJsonAsync<ShipProduct>($"{Url}/ship_product/GetByShipAndProductId/{shipId}/{productId}");
-
-
-            return response;
         }
     }
 }

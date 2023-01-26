@@ -7,9 +7,9 @@ namespace Hanseatic.ViewModel
 {
     public partial class MainPageViewModel : ObservableObject
     {
-        // The text in the input
+        // The name of the ship
         [ObservableProperty]
-        string text;
+        string shipName;
 
         /// <summary>
         /// Command to submit the name entered.
@@ -19,10 +19,10 @@ namespace Hanseatic.ViewModel
         [RelayCommand]
         async Task SubmitName()
         {
-            if (string.IsNullOrWhiteSpace(Text))
+            if (string.IsNullOrWhiteSpace(ShipName))
                 return;
 
-            Ship postShip = await ShipManager.Post(Text);
+            Ship postShip = await ShipManager.Post(ShipName);
 
             await ShipManager.PostShipProduct(postShip.Id);
 

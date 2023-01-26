@@ -35,11 +35,6 @@ namespace Hanseatic.Managers
             return client;
         }
 
-        /// <summary>
-        /// Send a POST request to create a new ship
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <returns></returns>
         public static async Task<Ship> Post(string Name)
         {
             // Gets the client
@@ -71,7 +66,7 @@ namespace Hanseatic.Managers
         /// <summary>
         /// Send a POST request to create all products for the ship with 0 in the amount
         /// </summary>
-        /// <param name="Name"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         public static async Task<List<ShipProduct>> PostShipProduct(int id)
         {
@@ -124,8 +119,7 @@ namespace Hanseatic.Managers
         /// <returns></returns>
         public static async Task<IEnumerable<Product>> GetAllProducts()
         {
-
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new List<Product>();
 

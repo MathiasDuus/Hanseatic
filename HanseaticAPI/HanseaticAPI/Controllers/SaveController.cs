@@ -16,10 +16,6 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Gets all saves
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Save>>> Get()
         {
@@ -27,11 +23,6 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.Saves.ToListAsync());
         }
 
-        /// <summary>
-        /// Gets a single save by its id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Save>>> Get(int id)
         {
@@ -44,11 +35,6 @@ namespace HanseaticAPI.Controllers
             return Ok(save);
         }
 
-        /// <summary>
-        /// Creates a new save
-        /// </summary>
-        /// <param name="saveDTO"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<Save>>> Add(SaveDTO saveDTO)
         {
@@ -70,11 +56,6 @@ namespace HanseaticAPI.Controllers
             return Ok(save);
         }
 
-        /// <summary>
-        /// Updates an exsisting save
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<Save>>> Update(Save request)
         {
@@ -99,11 +80,6 @@ namespace HanseaticAPI.Controllers
             return Ok(save);
         }
 
-        /// <summary>
-        /// Deletes a save
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Save>>> Delete(int id)
         {

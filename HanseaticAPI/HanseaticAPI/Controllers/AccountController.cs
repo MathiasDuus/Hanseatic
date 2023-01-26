@@ -16,10 +16,6 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Get all Accounts
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Account>>> Get()
         {
@@ -27,11 +23,6 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.Accounts.ToListAsync());
         }
 
-        /// <summary>
-        /// Get account based on ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Account>>> Get(int id)
         {
@@ -44,11 +35,6 @@ namespace HanseaticAPI.Controllers
             return Ok(account);
         }
 
-        /// <summary>
-        /// Create a new Account
-        /// </summary>
-        /// <param name="AccountDTO"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<Account>>> Add(AccountDTO AccountDTO)
         {
@@ -65,11 +51,6 @@ namespace HanseaticAPI.Controllers
             return Ok(account);
         }
 
-        /// <summary>
-        /// Update a single account
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<Account>>> Update(Account request)
         {
@@ -89,11 +70,6 @@ namespace HanseaticAPI.Controllers
             return Ok(account);
         }
 
-        /// <summary>
-        /// Delete an account
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Account>>> Delete(int id)
         {

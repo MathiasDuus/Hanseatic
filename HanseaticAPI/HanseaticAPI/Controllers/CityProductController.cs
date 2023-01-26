@@ -16,10 +16,6 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Gets all cityProducts
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<CityProduct>>> Get()
         {
@@ -27,11 +23,6 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.CityProducts.ToListAsync());
         }
 
-        /// <summary>
-        /// Gets a single cityProduct
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<CityProduct>>> Get(int id)
         {
@@ -44,37 +35,6 @@ namespace HanseaticAPI.Controllers
             return Ok(cityProduct);
         }
 
-        /// <summary>
-        /// Gets all productors in a city
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("GetByCityId/{id}")]
-        public async Task<ActionResult<List<CityProduct>>> GetProductByCityId(int id)
-        {
-            // Find city product where city id is input id
-            List<CityProduct> cityProduct = await _context.CityProducts.Where(c => c.CityId == id).ToListAsync();
-
-            // Check if city product exists 
-            if (cityProduct == null)
-                return BadRequest("City Product not found.");
-
-            Random rand = new();
-
-            foreach (CityProduct cp in cityProduct)
-            {
-                cp.ActualAmount = cp.ActualAmount * rand.Next(Convert.ToInt32(cp.MinAmountFluctation * 100), Convert.ToInt32(cp.MaxAmountFluctation * 100)) / 100;
-            }
-
-            // Return city product
-            return Ok(cityProduct);
-        }
-
-        /// <summary>
-        /// Creates a new product in the city
-        /// </summary>
-        /// <param name="cityProductDTO"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<CityProduct>>> Add(CityProductDTO cityProductDTO)
         {
@@ -106,11 +66,6 @@ namespace HanseaticAPI.Controllers
             return Ok(cityProduct);
         }
 
-        /// <summary>
-        /// Udates a product in the city
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<CityProduct>>> Update(CityProduct request)
         {
@@ -151,11 +106,6 @@ namespace HanseaticAPI.Controllers
             return Ok(cityProduct);
         }
 
-        /// <summary>
-        /// Deletes a product from the city
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<CityProduct>>> Delete(int id)
         {
@@ -172,6 +122,32 @@ namespace HanseaticAPI.Controllers
 
             // Return all city products
             return Ok(await _context.CityProducts.ToListAsync());
+        }
+
+        /// <summary>
+        /// Gets all productors in a city
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetByCityId/{id}")]
+        public async Task<ActionResult<List<CityProduct>>> GetProductByCityId(int id)
+        {
+            // Find city product where city id is input id
+            List<CityProduct> cityProduct = await _context.CityProducts.Where(c => c.CityId == id).ToListAsync();
+
+            // Check if city product exists 
+            if (cityProduct == null)
+                return BadRequest("City Product not found.");
+
+            Random rand = new();
+
+            foreach (CityProduct cp in cityProduct)
+            {
+                cp.ActualAmount = cp.ActualAmount * rand.Next(Convert.ToInt32(cp.MinAmountFluctation * 100), Convert.ToInt32(cp.MaxAmountFluctation * 100)) / 100;
+            }
+
+            // Return city product
+            return Ok(cityProduct);
         }
 
     }

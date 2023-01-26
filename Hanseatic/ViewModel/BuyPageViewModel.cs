@@ -19,6 +19,9 @@ public partial class BuyPageViewModel : ObservableObject
     [ObservableProperty]
     Ship ship;
 
+    [ObservableProperty]
+    CityProduct cityproduct;
+
     // A collection of the products in the city
     [ObservableProperty]
     ObservableCollection<CityProduct> productsCollection;
@@ -80,18 +83,8 @@ public partial class BuyPageViewModel : ObservableObject
         Console.WriteLine(foo);
 
         // Update City Product
-        var i = 0;
-        foreach (var product in productsCollection)
-        {
-            if (product.Id == cityProduct.Id)
-            {
-                ProductsCollection[i] = cityProduct;
-                break;
-            }
-            i++;
-        }
-
-        // cityProduct = ProductsCollection.First(i => i.Id == cityProduct.Id);
+        int ix = productsCollection.IndexOf(cityProduct);
+        productsCollection[ix] = cityProduct;
 
         // Update product collection
         // ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
@@ -174,7 +167,7 @@ public partial class BuyPageViewModel : ObservableObject
             Product prodType = await BuyManager.GetProductById(prod.ProductID);
 
             // Calculates the price at which it should be sold
-            prod.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(prod.ActualAmount) / Convert.ToDouble(prod.DesiredAmount)) - 1, 3) * (-30) + prod.BasePrice);
+            // prod.SellPrice = Convert.ToInt32(Math.Pow(2 * (Convert.ToDouble(prod.ActualAmount) / Convert.ToDouble(prod.DesiredAmount)) - 1, 3) * (-30) + prod.BasePrice);
 
             // If the sell price is below 0, it should just be 0
             if (prod.SellPrice < 0)

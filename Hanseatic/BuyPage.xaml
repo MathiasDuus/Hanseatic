@@ -95,7 +95,7 @@
         <ScrollView 
             Grid.Row="2"
             Grid.ColumnSpan="5">
-            
+
             <CollectionView ItemsSource="{Binding ProductsCollection}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="data:CityProduct">

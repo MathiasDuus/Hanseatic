@@ -10,7 +10,7 @@
         <Image Grid.Row="0" Source="dotnet_bot"/>
         
         <Entry Grid.Row="2" 
-               Text="{Binding Text}"
+               Text="{Binding ShipName}"
                Placeholder="Enter name"
                TextColor="Black" 
                PlaceholderColor="Black"/>

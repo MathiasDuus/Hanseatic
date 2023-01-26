@@ -16,10 +16,6 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Gets all cities
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<City>>> Get()
         {
@@ -27,11 +23,6 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.Cities.ToListAsync());
         }
 
-        /// <summary>
-        /// Get a city by ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<City>>> Get(int id)
         {
@@ -44,11 +35,6 @@ namespace HanseaticAPI.Controllers
             return Ok(city);
         }
 
-        /// <summary>
-        /// Create a new city
-        /// </summary>
-        /// <param name="cityDTO"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<City>>> Add(CityDTO cityDTO)
         {
@@ -65,11 +51,6 @@ namespace HanseaticAPI.Controllers
             return Ok(city);
         }
 
-        /// <summary>
-        /// Update a city
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<City>>> Update(City request)
         {
@@ -88,11 +69,6 @@ namespace HanseaticAPI.Controllers
             return Ok(city);
         }
 
-        /// <summary>
-        /// Delete a city
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<City>>> Delete(int id)
         {

@@ -8,11 +8,12 @@
              x:DataType="viewmodel:BuyPageViewModel"
              Title="{Binding CityName}">
 
-    <!-- When navigatedd to fluntuate the amount of product -->
     <ContentPage.Behaviors>
+        <!-- When navigatedd to load all the products for the city -->
         <toolkit:EventToCommandBehavior
             EventName="NavigatedTo"
             Command="{Binding LoadProductsCommand}"/>
+        <!-- When navigatedd from clear the ProductsCollection -->
         <toolkit:EventToCommandBehavior
             EventName="NavigatedFrom"
             Command="{Binding ClearProductsCommand}"/>
@@ -95,7 +96,7 @@
         <ScrollView 
             Grid.Row="2"
             Grid.ColumnSpan="5">
-
+            
             <CollectionView ItemsSource="{Binding ProductsCollection}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="data:CityProduct">

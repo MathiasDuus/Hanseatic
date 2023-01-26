@@ -16,10 +16,6 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Get all Products on a Ship
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<ShipProduct>>> Get()
         {
@@ -27,11 +23,6 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.ShipProducts.ToListAsync());
         }
 
-        /// <summary>
-        /// Gets ship product by ShipProductID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ShipProduct>>> Get(int id)
         {
@@ -44,11 +35,6 @@ namespace HanseaticAPI.Controllers
             return Ok(shipProduct);
         }
 
-        /// <summary>
-        /// Create a new ship product
-        /// </summary>
-        /// <param name="productDTO"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<ShipProduct>>> Add(ShipProductDTO productDTO)
         {
@@ -70,11 +56,6 @@ namespace HanseaticAPI.Controllers
             return Ok(shipProduct);
         }
 
-        /// <summary>
-        /// Updates one product on the ship
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<ShipProduct>>> Update(ShipProduct request)
         {
@@ -100,11 +81,6 @@ namespace HanseaticAPI.Controllers
             return Ok(shipProduct);
         }
 
-        /// <summary>
-        /// Removes a product from the ship
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<ShipProduct>>> Delete(int id)
         {
@@ -124,32 +100,6 @@ namespace HanseaticAPI.Controllers
         }
 
         /// <summary>
-        /// Gets all the products on a ship by its ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("GetByShipId/{id}")]
-        public async Task<ActionResult<List<ShipProduct>>> GetByShipId(int id)
-        {
-            // Return all ship products where ship id is input id
-            return Ok(await _context.ShipProducts.Where(c => c.ShipId == id).ToListAsync());
-        }
-
-        /// <summary>
-        /// Gets a single ship product based on ship id and product id
-        /// </summary>
-        /// <param name="shipId"></param>
-        /// <param name="productId"></param>
-        /// <returns></returns>
-        [HttpGet("GetByShipAndProductId/{shipId}/{productId}")]
-        public async Task<ActionResult<List<ShipProduct>>> GetByShipAndProductId(int shipId, int productId)
-        {
-            // Return all ship products where ship id is input id
-            return Ok(await _context.ShipProducts.Where(c => c.ShipId == shipId && c.ProductTypeId == productId).FirstAsync());
-        }
-
-
-        /// <summary>
         /// Adds all products to a ship
         /// </summary>
         /// <param name="productDTO"></param>
@@ -158,6 +108,8 @@ namespace HanseaticAPI.Controllers
         public async Task<ActionResult<List<ShipProduct>>> AddAllShipProducts(List<ShipProductDTO> shipProductDTO)
         {
             ShipProduct shipProduct = new();
+
+            // The list used for retirning all the ship_products
             List<ShipProduct> shipProducts = new();
             foreach (ShipProductDTO item in shipProductDTO)
             {
@@ -180,6 +132,19 @@ namespace HanseaticAPI.Controllers
 
             // Return ship product
             return Ok(shipProducts);
+        }
+
+
+        /// <summary>
+        /// Gets all the products on a ship by its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetByShipId/{id}")]
+        public async Task<ActionResult<List<ShipProduct>>> GetByShipId(int id)
+        {
+            // Return all ship products where ship id is input id
+            return Ok(await _context.ShipProducts.Where(c => c.ShipId == id).ToListAsync());
         }
     }
 }

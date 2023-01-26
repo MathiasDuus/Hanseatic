@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace Hanseatic.ViewModel;
 
-// A parameter send via the shell
+// Two parameters send via the shell
 [QueryProperty("CityName", "city_name")]
 [QueryProperty("Ship", "ship")]
 public partial class BuyPageViewModel : ObservableObject
@@ -124,9 +124,6 @@ public partial class BuyPageViewModel : ObservableObject
     [RelayCommand]
     private async Task LoadProducts()
     {
-        // Short wait to ensure CityName is set
-        //await Task.Delay(20);
-
         // Call api to get the id of the city
         int cityId = await BuyManager.GetCityIdByName(CityName);
 
@@ -174,6 +171,11 @@ public partial class BuyPageViewModel : ObservableObject
         }
     }
 
+    /// <summary>
+    /// Update the sell price for the CityProduct
+    /// </summary>
+    /// <param name="prod"></param>
+    /// <returns></returns>
     private int UpdateSellPrice(CityProduct prod)
     {
         double firstPart = Math.Pow(2 * (Convert.ToDouble(prod.ActualAmount) / Convert.ToDouble(prod.DesiredAmount)) - 1, 3);

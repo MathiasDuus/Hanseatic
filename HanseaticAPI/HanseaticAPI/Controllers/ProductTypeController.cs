@@ -16,10 +16,6 @@ namespace HanseaticAPI.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Gets all productypes
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<ProductType>>> Get()
         {
@@ -27,11 +23,6 @@ namespace HanseaticAPI.Controllers
             return Ok(await _context.ProductTypes.ToListAsync());
         }
 
-        /// <summary>
-        /// Gets a single product by ProductID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ProductType>>> Get(int id)
         {
@@ -44,11 +35,6 @@ namespace HanseaticAPI.Controllers
             return Ok(productType);
         }
 
-        /// <summary>
-        /// Create a new product
-        /// </summary>
-        /// <param name="typeDTO"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<List<ProductType>>> Add(ProductTypeDTO typeDTO)
         {
@@ -65,11 +51,6 @@ namespace HanseaticAPI.Controllers
             return Ok(productType);
         }
 
-        /// <summary>
-        /// Updates a product
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult<List<ProductType>>> Update(ProductType request)
         {
@@ -88,11 +69,6 @@ namespace HanseaticAPI.Controllers
             return Ok(productType);
         }
 
-        /// <summary>
-        /// Deletes a product
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<ProductType>>> Delete(int id)
         {

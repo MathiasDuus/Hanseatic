@@ -115,7 +115,7 @@ public partial class BuyPageViewModel : ObservableObject
         await BuyManager.PutShipProduct(shipProduct);
 
         // Update ship
-        await BuyManager.PutShip(Ship);
+        Ship = await BuyManager.PutShip(Ship);
 
         //Update city product
         await BuyManager.PutCityProduct(cityProduct);

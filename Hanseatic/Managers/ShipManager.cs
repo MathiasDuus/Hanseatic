@@ -113,9 +113,8 @@ namespace Hanseatic.Managers
         }
 
         /// <summary>
-        /// Gets all products
+        /// Gets all product types
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
         public static async Task<IEnumerable<Product>> GetAllProducts()
         {
@@ -130,15 +129,9 @@ namespace Hanseatic.Managers
             return await client.GetFromJsonAsync<IEnumerable<Product>>($"{Url}/product_type");
         }
 
-        /// <summary>
-        /// Gets the Ship by its ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public static async Task<Ship> GetShip(int id)
         {
-
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new Ship();
 

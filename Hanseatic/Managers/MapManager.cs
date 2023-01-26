@@ -34,15 +34,10 @@ namespace Hanseatic.Managers
             return client;
         }
 
-        /// <summary>
-        /// Gets the Save by id of the save
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public static async Task<Save> GetSaveById(int id)
         {
 
-            // Check for internet, might have to disable, bc emulator
+            // Check for internet
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return new Save();
 

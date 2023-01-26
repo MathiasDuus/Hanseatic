@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using Hanseatic.Managers;
 using Hanseatic.Models;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace Hanseatic.ViewModel;
 
@@ -16,6 +15,7 @@ public partial class BuyPageViewModel : ObservableObject
     [ObservableProperty]
     string cityName;
 
+    // The current ship
     [ObservableProperty]
     Ship ship;
 
@@ -26,9 +26,6 @@ public partial class BuyPageViewModel : ObservableObject
     [RelayCommand]
     public async void Buy(CityProduct cityProduct)
     {
-        // Get index of city product in collection
-        int ix = productsCollection.IndexOf(cityProduct);
-
         // Check if ship has enough coin to buy
         if (Ship.Coin < cityProduct.BuyPrice)
         {
@@ -44,12 +41,9 @@ public partial class BuyPageViewModel : ObservableObject
         // Add product to ship product
         cityProduct.ShipProductAmount += 1;
 
-
         // Calculates the price at which it should be sold
-
         cityProduct.SellPrice = UpdateSellPrice(cityProduct);
 
-        // Calculates the price at which it should be sold
         // If the sell price is below 0, it should just be 0
         if (cityProduct.SellPrice < 0)
         {
@@ -68,9 +62,6 @@ public partial class BuyPageViewModel : ObservableObject
             Amount = cityProduct.ShipProductAmount
         };
 
-        var timer = new Stopwatch();
-        timer.Start();
-
         // Update Ship Product
         await BuyManager.PutShipProduct(shipProduct);
 
@@ -78,21 +69,7 @@ public partial class BuyPageViewModel : ObservableObject
         Ship = await BuyManager.PutShip(Ship);
 
         // Update city product
-        // cityProduct = 
         await BuyManager.PutCityProduct(cityProduct);
-
-        timer.Stop();
-        TimeSpan timeTaken = timer.Elapsed;
-        string foo = "Time taken for API calls: " + timeTaken.ToString(@"m\:ss\.fff");
-        Console.WriteLine(foo);
-
-        // Update City Product
-        // productsCollection[ix] = cityProduct;
-        // productsCollection.RemoveAt(ix);
-        // productsCollection.Insert(ix, cityProduct);
-
-        // Update product collection
-        // ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
     }
 
     [RelayCommand]
@@ -142,9 +119,6 @@ public partial class BuyPageViewModel : ObservableObject
 
         //Update city product
         await BuyManager.PutCityProduct(cityProduct);
-
-        // Update product collection
-        ProductsCollection = new ObservableCollection<CityProduct>(ProductsCollection);
     }
 
     [RelayCommand]
